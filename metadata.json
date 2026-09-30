@@ -1,0 +1,6 @@
+{
+  "name": "SAQ STUDIO",
+  "description": "Clean, minimal black and white website for SAQ STUDIO.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
