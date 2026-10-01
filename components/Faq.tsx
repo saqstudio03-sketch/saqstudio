@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ChevronDown, ArrowRight, MessageSquare, HelpCircle } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { ScrollReveal, StaggerContainer, StaggerItem } from './ScrollReveal';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -96,30 +96,33 @@ export function Faq({ onContactClick }: FaqProps) {
       <div className="w-full px-6 sm:px-10 lg:px-16">
         {/* Section Header */}
         <ScrollReveal yOffset={20} duration={0.6}>
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14 sm:mb-16">
-            <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-black text-white text-[11px] font-mono uppercase tracking-widest mb-4">
-                <HelpCircle className="w-3 h-3" />
-                <span>FAQ</span>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+            <div>
+              <div className="text-xs font-mono uppercase tracking-widest text-black/60 mb-2">
+                FAQ
               </div>
-              <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight uppercase text-black leading-[0.98] mb-4">
-                Frequently Asked<br />Questions
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight uppercase text-black">
+                Frequently Asked Questions
               </h2>
-              <p className="text-base sm:text-lg text-black/80 font-normal leading-relaxed text-balance">
-                Everything you need to know about working with SAQ Studio. Can&apos;t find the answer you&apos;re looking for? Feel free to contact us.
-              </p>
             </div>
-
-            {/* Direct Ask Button */}
-            <div className="shrink-0">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 max-w-xl">
+              <p className="text-sm text-black/70 font-normal leading-relaxed">
+                Everything you need to know about working with SAQ Studio. Can&apos;t find the answer you&apos;re looking for?{' '}
+                <button
+                  type="button"
+                  onClick={handleAskQuestion}
+                  className="underline hover:text-black cursor-pointer font-medium"
+                >
+                  Feel free to contact us
+                </button>
+                .
+              </p>
               <button
                 type="button"
                 onClick={handleAskQuestion}
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-black text-white hover:bg-neutral-800 text-xs font-mono uppercase tracking-widest transition-all shadow-xs hover:shadow-md cursor-pointer group"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-black text-white hover:bg-neutral-800 text-xs font-mono uppercase tracking-wider transition-colors shrink-0 cursor-pointer shadow-xs"
               >
-                <MessageSquare className="w-3.5 h-3.5" />
                 <span>Ask a Question</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>
@@ -128,7 +131,7 @@ export function Faq({ onContactClick }: FaqProps) {
         {/* FAQ Accordion List */}
         <StaggerContainer
           staggerDelay={0.06}
-          className="border-t border-black divide-y divide-black/10 max-w-5xl"
+          className="border-t border-black divide-y divide-black/10"
         >
           {FAQS_DATA.map((item) => {
             const isOpen = openIds.includes(item.id);
@@ -140,14 +143,14 @@ export function Faq({ onContactClick }: FaqProps) {
                     onClick={() => toggleItem(item.id)}
                     aria-expanded={isOpen}
                     aria-controls={`faq-answer-${item.id}`}
-                    className="w-full py-6 sm:py-8 px-4 sm:px-6 flex items-start justify-between gap-6 text-left cursor-pointer select-none"
+                    className="w-full py-5 sm:py-6 px-4 sm:px-6 flex items-start justify-between gap-6 text-left cursor-pointer select-none"
                   >
                     <div className="flex items-start gap-4 sm:gap-8">
                       <span className="text-xs font-mono font-bold text-black/40 group-hover:text-black transition-colors pt-1">
                         /{item.num}
                       </span>
                       <div>
-                        <h3 className="text-lg sm:text-2xl font-bold tracking-tight uppercase text-black group-hover:underline underline-offset-4">
+                        <h3 className="text-lg sm:text-xl font-bold tracking-tight uppercase text-black group-hover:underline underline-offset-4">
                           {item.question}
                         </h3>
                         {!isOpen && (
@@ -183,7 +186,7 @@ export function Faq({ onContactClick }: FaqProps) {
                         transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden"
                       >
-                        <div className="pb-8 pt-2 px-4 sm:px-6 sm:pl-20 border-t border-black/5">
+                        <div className="pb-6 pt-2 px-4 sm:px-6 sm:pl-20 border-t border-black/5">
                           <p className="text-sm sm:text-base leading-relaxed text-black/80 max-w-3xl mb-4 font-normal">
                             {item.answer}
                           </p>
@@ -202,28 +205,6 @@ export function Faq({ onContactClick }: FaqProps) {
             );
           })}
         </StaggerContainer>
-
-        {/* Bottom Banner */}
-        <ScrollReveal delay={0.2} yOffset={16} className="mt-12 max-w-5xl">
-          <div className="border border-black p-6 sm:p-8 bg-neutral-950 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-6 shadow-sm">
-            <div>
-              <div className="text-[11px] font-mono uppercase tracking-widest text-neutral-400 mb-1">
-                Have a unique requirement?
-              </div>
-              <p className="text-base sm:text-lg font-bold uppercase tracking-tight">
-                We craft custom digital solutions tailored to your specific vision.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={handleAskQuestion}
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-white text-black hover:bg-neutral-200 text-xs font-mono uppercase tracking-widest transition-colors shrink-0 cursor-pointer"
-            >
-              <span>Get in Touch</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
-        </ScrollReveal>
       </div>
     </section>
   );
