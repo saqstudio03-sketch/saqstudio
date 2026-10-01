@@ -105,26 +105,17 @@ export function Faq({ onContactClick }: FaqProps) {
                 Frequently Asked Questions
               </h2>
             </div>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4 max-w-xl">
-              <p className="text-sm text-black/70 font-normal leading-relaxed">
-                Everything you need to know about working with SAQ Studio. Can&apos;t find the answer you&apos;re looking for?{' '}
-                <button
-                  type="button"
-                  onClick={handleAskQuestion}
-                  className="underline hover:text-black cursor-pointer font-medium"
-                >
-                  Feel free to contact us
-                </button>
-                .
-              </p>
+            <p className="text-sm text-black/70 max-w-md font-normal leading-relaxed">
+              Everything you need to know about working with SAQ Studio. Can&apos;t find the answer you&apos;re looking for?{' '}
               <button
                 type="button"
                 onClick={handleAskQuestion}
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-black text-white hover:bg-neutral-800 text-xs font-mono uppercase tracking-wider transition-colors shrink-0 cursor-pointer shadow-xs"
+                className="underline hover:text-black cursor-pointer font-medium"
               >
-                <span>Ask a Question</span>
+                Feel free to contact us
               </button>
-            </div>
+              .
+            </p>
           </div>
         </ScrollReveal>
 
