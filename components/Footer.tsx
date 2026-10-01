@@ -66,6 +66,11 @@ export function Footer({ onNavigate }: FooterProps) {
                   </button>
                 </li>
                 <li>
+                  <button onClick={() => onNavigate('faq')} className="hover:underline">
+                    FAQ
+                  </button>
+                </li>
+                <li>
                   <button onClick={() => onNavigate('contact')} className="hover:underline">
                     Inquire
                   </button>

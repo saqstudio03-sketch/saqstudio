@@ -7,6 +7,7 @@ import { Works } from '@/components/Works';
 import { Disciplines } from '@/components/Disciplines';
 import { About } from '@/components/About';
 import { Contact } from '@/components/Contact';
+import { Faq } from '@/components/Faq';
 import { Footer } from '@/components/Footer';
 import { ScrollSequenceBackground } from '@/components/ScrollSequenceBackground';
 
@@ -41,6 +42,9 @@ export default function HomePage() {
           <Works onContactClick={() => scrollToSection('contact')} />
           <Disciplines onContactClick={() => scrollToSection('contact')} />
         </ScrollSequenceBackground>
+
+        {/* Frequently Asked Questions */}
+        <Faq onContactClick={() => scrollToSection('contact')} />
 
         <Contact />
       </main>
