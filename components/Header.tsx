@@ -42,7 +42,7 @@ export function Header({ onNavigate }: HeaderProps) {
               height={36}
               className="h-7 w-auto object-contain transition-transform group-hover:scale-105"
               priority
-              referrerPolicy="no-referrer"
+              unoptimized
             />
           </div>
         </button>

@@ -31,7 +31,7 @@ export function Footer({ onNavigate }: FooterProps) {
                   width={76}
                   height={38}
                   className="h-7 w-auto object-contain transition-transform group-hover:scale-105"
-                  referrerPolicy="no-referrer"
+                  unoptimized
                 />
               </div>
             </button>
