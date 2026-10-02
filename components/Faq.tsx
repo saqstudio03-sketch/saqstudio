@@ -136,9 +136,9 @@ export function Faq({ onContactClick }: FaqProps) {
                     aria-controls={`faq-answer-${item.id}`}
                     className="w-full flex items-start justify-between gap-6 text-left cursor-pointer select-none group"
                   >
-                    <div className="flex items-start gap-4 sm:gap-8 flex-1">
-                      <span className="text-xs font-mono font-bold text-black/40 group-hover:text-black transition-colors pt-1">
-                        /{item.num}
+                    <div className="flex flex-col sm:flex-row sm:items-baseline gap-4 sm:gap-8 flex-1">
+                      <span className="font-mono text-xl sm:text-2xl font-bold text-black/40 group-hover:text-black transition-colors w-12 shrink-0">
+                        {item.num}
                       </span>
                       <div className="flex-1">
                         <h3 className="text-lg sm:text-xl font-bold tracking-tight uppercase text-black group-hover:underline underline-offset-4">
@@ -177,7 +177,7 @@ export function Faq({ onContactClick }: FaqProps) {
                         transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden"
                       >
-                        <div className="pb-4 pt-3 sm:pl-12 md:pl-16 border-t border-black/10 mt-4">
+                        <div className="pb-4 pt-3 sm:pl-20 border-t border-black/10 mt-4">
                           <p className="text-sm sm:text-base leading-relaxed text-black/85 max-w-3xl mb-4 font-normal">
                             {item.answer}
                           </p>
