@@ -126,7 +126,7 @@ export function Contact() {
           {/* Left Column: Direct Studio Line & Coordinates */}
           <ScrollReveal delay={0.1} yOffset={24} duration={0.7} className="lg:col-span-4 space-y-6">
             {/* Direct Line Card */}
-            <div className="border border-black p-6 sm:p-7 bg-white space-y-6">
+            <div className="border border-black p-6 sm:p-7 bg-transparent backdrop-blur-xs space-y-6">
               <div>
                 <span className="block text-xs font-mono uppercase tracking-wider text-black/50 mb-1.5 flex items-center gap-1.5">
                   <Phone className="w-3.5 h-3.5 text-black" />
@@ -196,7 +196,7 @@ export function Contact() {
           {/* Right Column: Inquiry Form */}
           <ScrollReveal delay={0.2} yOffset={24} duration={0.7} className="lg:col-span-8">
             {submitted ? (
-              <div className="border border-black p-8 sm:p-12 text-center bg-white space-y-6">
+              <div className="border border-black p-8 sm:p-12 text-center bg-transparent backdrop-blur-xs space-y-6">
                 <div className="w-12 h-12 mx-auto rounded-full border border-black flex items-center justify-center">
                   <Check className="w-6 h-6 text-black" />
                 </div>
@@ -226,7 +226,7 @@ export function Contact() {
                 )}
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="border border-black p-6 sm:p-10 bg-white space-y-6">
+              <form onSubmit={handleSubmit} className="border border-black p-6 sm:p-10 bg-transparent backdrop-blur-xs space-y-6">
                 <div className="text-xs font-mono uppercase tracking-wider text-black/60 border-b border-black/10 pb-4 flex items-center justify-between">
                   <span>Project Vision & Details</span>
                   <span className="text-[11px] text-black/40">* Required fields</span>
@@ -245,7 +245,7 @@ export function Contact() {
                       placeholder="John Doe"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-white border border-black/30 px-3.5 py-2.5 text-sm text-black placeholder:text-black/30 focus:outline-hidden focus:border-black transition-colors"
+                      className="w-full bg-white/40 backdrop-blur-xs border border-black/30 px-3.5 py-2.5 text-sm text-black placeholder:text-black/40 focus:outline-hidden focus:bg-white/80 focus:border-black transition-colors"
                     />
                   </div>
 
@@ -260,7 +260,7 @@ export function Contact() {
                       placeholder="+1 (555) 000-0000"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full bg-white border border-black/30 px-3.5 py-2.5 text-sm text-black placeholder:text-black/30 focus:outline-hidden focus:border-black transition-colors"
+                      className="w-full bg-white/40 backdrop-blur-xs border border-black/30 px-3.5 py-2.5 text-sm text-black placeholder:text-black/40 focus:outline-hidden focus:bg-white/80 focus:border-black transition-colors"
                     />
                   </div>
                 </div>
@@ -277,7 +277,7 @@ export function Contact() {
                     placeholder="john@example.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-white border border-black/30 px-3.5 py-2.5 text-sm text-black placeholder:text-black/30 focus:outline-hidden focus:border-black transition-colors"
+                    className="w-full bg-white/40 backdrop-blur-xs border border-black/30 px-3.5 py-2.5 text-sm text-black placeholder:text-black/40 focus:outline-hidden focus:bg-white/80 focus:border-black transition-colors"
                   />
                 </div>
 
@@ -291,17 +291,17 @@ export function Contact() {
                       id="industry"
                       value={formData.industry}
                       onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
-                      className="w-full bg-white border border-black/30 px-3.5 py-2.5 text-sm text-black focus:outline-hidden focus:border-black transition-colors"
+                      className="w-full bg-white/40 backdrop-blur-xs border border-black/30 px-3.5 py-2.5 text-sm text-black focus:outline-hidden focus:bg-white/80 focus:border-black transition-colors"
                     >
-                      <option value="">Select industry</option>
-                      <option value="E-Commerce & Retail">E-Commerce & Retail</option>
-                      <option value="SaaS & Technology">SaaS & Technology</option>
-                      <option value="Architecture & Real Estate">Architecture & Real Estate</option>
-                      <option value="Healthcare & Wellness">Healthcare & Wellness</option>
-                      <option value="Fashion & Luxury">Fashion & Luxury</option>
-                      <option value="Professional Services & Consulting">Professional Services & Consulting</option>
-                      <option value="Media & Creative">Media & Creative</option>
-                      <option value="Other">Other</option>
+                      <option value="" className="bg-white text-black">Select industry</option>
+                      <option value="E-Commerce & Retail" className="bg-white text-black">E-Commerce & Retail</option>
+                      <option value="SaaS & Technology" className="bg-white text-black">SaaS & Technology</option>
+                      <option value="Architecture & Real Estate" className="bg-white text-black">Architecture & Real Estate</option>
+                      <option value="Healthcare & Wellness" className="bg-white text-black">Healthcare & Wellness</option>
+                      <option value="Fashion & Luxury" className="bg-white text-black">Fashion & Luxury</option>
+                      <option value="Professional Services & Consulting" className="bg-white text-black">Professional Services & Consulting</option>
+                      <option value="Media & Creative" className="bg-white text-black">Media & Creative</option>
+                      <option value="Other" className="bg-white text-black">Other</option>
                     </select>
                   </div>
 
@@ -313,16 +313,16 @@ export function Contact() {
                       id="serviceNeeded"
                       value={formData.serviceNeeded}
                       onChange={(e) => setFormData({ ...formData, serviceNeeded: e.target.value })}
-                      className="w-full bg-white border border-black/30 px-3.5 py-2.5 text-sm text-black focus:outline-hidden focus:border-black transition-colors"
+                      className="w-full bg-white/40 backdrop-blur-xs border border-black/30 px-3.5 py-2.5 text-sm text-black focus:outline-hidden focus:bg-white/80 focus:border-black transition-colors"
                     >
-                      <option value="">Select service</option>
-                      <option value="High-Performance Web Development">High-Performance Web Development</option>
-                      <option value="E-Commerce Platform">E-Commerce Platform</option>
-                      <option value="Web Application & SaaS">Web Application & SaaS</option>
-                      <option value="Full Website Redesign">Full Website Redesign</option>
-                      <option value="Conversion Optimization (CRO)">Conversion Optimization (CRO)</option>
-                      <option value="Bespoke Digital Experience">Bespoke Digital Experience</option>
-                      <option value="Other">Other</option>
+                      <option value="" className="bg-white text-black">Select service</option>
+                      <option value="High-Performance Web Development" className="bg-white text-black">High-Performance Web Development</option>
+                      <option value="E-Commerce Platform" className="bg-white text-black">E-Commerce Platform</option>
+                      <option value="Web Application & SaaS" className="bg-white text-black">Web Application & SaaS</option>
+                      <option value="Full Website Redesign" className="bg-white text-black">Full Website Redesign</option>
+                      <option value="Conversion Optimization (CRO)" className="bg-white text-black">Conversion Optimization (CRO)</option>
+                      <option value="Bespoke Digital Experience" className="bg-white text-black">Bespoke Digital Experience</option>
+                      <option value="Other" className="bg-white text-black">Other</option>
                     </select>
                   </div>
                 </div>
@@ -338,7 +338,7 @@ export function Contact() {
                     placeholder="Tell us about your project vision, target audience, specific requirements, or reference links..."
                     value={formData.projectDetails}
                     onChange={(e) => setFormData({ ...formData, projectDetails: e.target.value })}
-                    className="w-full bg-white border border-black/30 p-3.5 text-sm text-black placeholder:text-black/30 focus:outline-hidden focus:border-black transition-colors resize-y min-h-[100px]"
+                    className="w-full bg-white/40 backdrop-blur-xs border border-black/30 p-3.5 text-sm text-black placeholder:text-black/40 focus:outline-hidden focus:bg-white/80 focus:border-black transition-colors resize-y min-h-[100px]"
                   />
                 </div>
 
