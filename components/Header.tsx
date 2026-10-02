@@ -14,6 +14,10 @@ export function Header({ onNavigate }: HeaderProps) {
   const [activeSection, setActiveSection] = useState('overview');
   const [hoveredNav, setHoveredNav] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+
+  // Directional scroll tracking for smart hide/reveal
+  const lastScrollYRef = useRef(0);
 
   // Lock scroll-spy updates temporarily when user explicitly clicks a nav item
   const isNavigatingRef = useRef(false);
@@ -84,7 +88,25 @@ export function Header({ onNavigate }: HeaderProps) {
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          setIsScrolled(window.scrollY > 20);
+          const currentScrollY = window.scrollY;
+          const delta = currentScrollY - lastScrollYRef.current;
+
+          setIsScrolled(currentScrollY > 20);
+
+          // Smart hide/reveal on scroll direction
+          if (currentScrollY <= 60) {
+            setIsVisible(true);
+          } else if (mobileMenuOpen || isNavigatingRef.current) {
+            setIsVisible(true);
+          } else if (delta > 6 && currentScrollY > 100) {
+            // Scrolling down -> hide header
+            setIsVisible(false);
+          } else if (delta < -6) {
+            // Scrolling up -> reveal header
+            setIsVisible(true);
+          }
+
+          lastScrollYRef.current = Math.max(0, currentScrollY);
 
           if (!isNavigatingRef.current) {
             checkActiveSection();
@@ -115,13 +137,14 @@ export function Header({ onNavigate }: HeaderProps) {
       window.removeEventListener('touchstart', handleUserInteraction);
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
     };
-  }, []);
+  }, [mobileMenuOpen]);
 
   const handleNavClick = (id: string) => {
     isNavigatingRef.current = true;
     setActiveSection(id);
     setHoveredNav(null);
     setMobileMenuOpen(false);
+    setIsVisible(true);
     onNavigate(id);
 
     if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
@@ -131,7 +154,10 @@ export function Header({ onNavigate }: HeaderProps) {
   };
 
   return (
-    <header
+    <motion.header
+      initial={{ y: 0 }}
+      animate={{ y: isVisible ? 0 : -80 }}
+      transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
       className={`sticky top-0 z-40 transition-colors duration-300 ${
         isScrolled
           ? 'bg-white/90 backdrop-blur-md shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)] border-b border-black/10'
@@ -316,6 +342,6 @@ export function Header({ onNavigate }: HeaderProps) {
         )}
       </AnimatePresence>
 
-    </header>
+    </motion.header>
   );
 }

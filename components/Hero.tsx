@@ -84,29 +84,55 @@ export function Hero({ onExploreClick, onContactClick, onScrollDownClick }: Hero
         {/* Center: Grand Headline & Studio Manifesto */}
         <div className="max-w-6xl">
           {/* Studio Primary Title */}
-          <div>
-            <h1 className="text-6xl sm:text-8xl md:text-9xl lg:text-[10vw] xl:text-[11vw] font-black tracking-tighter uppercase leading-[0.88] mb-6 sm:mb-8">
-              <span className="text-black">SAQ </span>
-              <span
-                className="text-white [-webkit-text-stroke:2px_black] sm:[-webkit-text-stroke:3px_black] md:[-webkit-text-stroke:4px_black] [paint-order:stroke_fill]"
-                style={{
-                  WebkitTextStroke: 'clamp(2.5px, 0.4vw + 2px, 5px) #000000',
-                  paintOrder: 'stroke fill',
-                }}
-              >
-                STUDIO
+          <div className="overflow-hidden">
+            <h1 className="text-6xl sm:text-8xl md:text-9xl lg:text-[10vw] xl:text-[11vw] font-black tracking-tighter uppercase leading-[0.88] mb-6 sm:mb-8 flex flex-wrap items-baseline gap-x-4 sm:gap-x-7">
+              <span className="inline-block overflow-hidden pb-1">
+                <motion.span
+                  initial={{ y: '105%', opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.9, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+                  className="inline-block text-black"
+                >
+                  SAQ
+                </motion.span>
+              </span>
+
+              <span className="inline-block overflow-hidden pb-1">
+                <motion.span
+                  initial={{ y: '105%', opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.9, delay: 0.26, ease: [0.16, 1, 0.3, 1] }}
+                  className="inline-block text-white [-webkit-text-stroke:2px_black] sm:[-webkit-text-stroke:3px_black] md:[-webkit-text-stroke:4px_black] [paint-order:stroke_fill]"
+                  style={{
+                    WebkitTextStroke: 'clamp(2.5px, 0.4vw + 2px, 5px) #000000',
+                    paintOrder: 'stroke fill',
+                  }}
+                >
+                  STUDIO
+                </motion.span>
               </span>
             </h1>
           </div>
 
           {/* Studio Subheading / Manifesto */}
           <div className="max-w-3xl">
-            <p className="text-lg sm:text-2xl md:text-3xl font-normal text-black leading-snug tracking-tight text-balance">
+            <motion.p
+              initial={{ opacity: 0, y: 22, filter: 'blur(6px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{ duration: 0.85, delay: 0.42, ease: [0.16, 1, 0.3, 1] }}
+              className="text-lg sm:text-2xl md:text-3xl font-normal text-black leading-snug tracking-tight text-balance"
+            >
               A minimalist design practice committed to clarity, spatial proportion, and functional restraint. We strip away the unnecessary so what remains is essential.
-            </p>
+            </motion.p>
 
-            <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.75, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4"
+            >
               <button
+                type="button"
                 onClick={onExploreClick}
                 className="inline-flex items-center gap-2 px-8 py-3.5 bg-black text-white text-xs font-semibold uppercase tracking-wider rounded-full hover:bg-neutral-800 transition-all shadow-xs cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
               >
@@ -115,12 +141,13 @@ export function Hero({ onExploreClick, onContactClick, onScrollDownClick }: Hero
               </button>
 
               <button
+                type="button"
                 onClick={onContactClick}
                 className="inline-flex items-center gap-2 px-8 py-3.5 border border-black bg-white/90 text-black text-xs font-semibold uppercase tracking-wider rounded-full hover:bg-black hover:text-white transition-all cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
               >
                 <span>Contact Studio</span>
               </button>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
