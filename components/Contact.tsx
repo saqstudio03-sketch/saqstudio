@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Phone, Mail, MessageSquare, Copy, Check, ArrowRight, Send, ExternalLink } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
 
@@ -19,6 +19,16 @@ export function Contact() {
   const [copiedPhone, setCopiedPhone] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [lastWhatsAppUrl, setLastWhatsAppUrl] = useState('');
+
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      videoRef.current.play().catch(() => {});
+    }
+  }, []);
 
   const directPhone = '+91 75104 66725';
   const directPhoneRaw = '917510466725';
@@ -162,6 +172,25 @@ export function Contact() {
                   <span>Chat on WhatsApp</span>
                   <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                 </a>
+              </div>
+            </div>
+
+            {/* Studio Contact Video (Playing as a seamless GIF loop) */}
+            <div className="border border-black bg-neutral-950 overflow-hidden shadow-xs">
+              <div className="relative aspect-video w-full overflow-hidden bg-neutral-950">
+                <video
+                  ref={videoRef}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="auto"
+                  className="w-full h-full object-cover block"
+                  aria-label="SAQ Studio Contact Animation"
+                >
+                  <source src="/contact_section_video.mp4" type="video/mp4" />
+                  <source src="/Contact%20section%20video.mp4" type="video/mp4" />
+                </video>
               </div>
             </div>
           </ScrollReveal>
