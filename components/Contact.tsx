@@ -87,8 +87,25 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 md:py-28 border-b border-black/10 bg-transparent overflow-hidden scroll-mt-20">
-      <div className="w-full px-6 sm:px-10 lg:px-16">
+    <section id="contact" className="relative py-20 md:py-28 border-b border-black/10 bg-white overflow-hidden scroll-mt-20">
+      {/* Background Video Layer (Playing as continuous GIF loop) */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover"
+          aria-hidden="true"
+        >
+          <source src="/contact_section_video.mp4" type="video/mp4" />
+          <source src="/Contact%20section%20video.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <div className="relative z-10 w-full px-6 sm:px-10 lg:px-16">
         {/* Section Header */}
         <ScrollReveal yOffset={20} duration={0.6}>
           <div className="max-w-4xl mb-14 sm:mb-16">
@@ -172,25 +189,6 @@ export function Contact() {
                   <span>Chat on WhatsApp</span>
                   <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                 </a>
-              </div>
-            </div>
-
-            {/* Studio Contact Video (Playing as a seamless GIF loop) */}
-            <div className="border border-black bg-neutral-950 overflow-hidden shadow-xs">
-              <div className="relative aspect-video w-full overflow-hidden bg-neutral-950">
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="auto"
-                  className="w-full h-full object-cover block"
-                  aria-label="SAQ Studio Contact Animation"
-                >
-                  <source src="/contact_section_video.mp4" type="video/mp4" />
-                  <source src="/Contact%20section%20video.mp4" type="video/mp4" />
-                </video>
               </div>
             </div>
           </ScrollReveal>
