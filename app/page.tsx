@@ -42,7 +42,7 @@ export default function HomePage() {
           onContactClick={() => scrollToSection('contact')}
         />
         
-        {/* Scroll-driven 147-Frame Sequence Background Animation (About Us to Disciplines) */}
+        {/* Scroll-driven 147-Frame Sequence Background Animation (About Us to FAQ) */}
         <ScrollSequenceBackground
           totalFrames={147}
           framePrefix="/sequence/ezgif-frame-"
@@ -51,10 +51,8 @@ export default function HomePage() {
           <About />
           <Works onContactClick={() => scrollToSection('contact')} />
           <Disciplines onContactClick={() => scrollToSection('contact')} />
+          <Faq onContactClick={() => scrollToSection('contact')} />
         </ScrollSequenceBackground>
-
-        {/* Frequently Asked Questions */}
-        <Faq onContactClick={() => scrollToSection('contact')} />
 
         <Contact />
       </main>
