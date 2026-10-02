@@ -81,11 +81,11 @@ export function Disciplines({ onContactClick }: DisciplinesProps) {
   };
 
   return (
-    <section id="disciplines" className="border-b border-black/10 py-20 md:py-28 bg-transparent overflow-hidden scroll-mt-20">
-      <div className="w-full px-6 sm:px-10 lg:px-16">
+    <section id="disciplines" className="relative border-b border-black/10 w-full min-h-[100dvh] min-h-[640px] flex flex-col justify-between py-10 md:py-14 bg-transparent overflow-hidden scroll-mt-20">
+      <div className="w-full px-6 sm:px-10 lg:px-16 flex-1 flex flex-col justify-between">
         {/* Section Header */}
         <ScrollReveal yOffset={20} duration={0.6}>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-10">
             <div>
               <div className="text-xs font-mono uppercase tracking-widest text-black/60 mb-2">
                 Capabilities
@@ -101,12 +101,12 @@ export function Disciplines({ onContactClick }: DisciplinesProps) {
         </ScrollReveal>
 
         {/* Disciplines Accordion / Grid */}
-        <StaggerContainer staggerDelay={0.08} className="border-t border-black divide-y divide-black/10">
+        <StaggerContainer staggerDelay={0.08} className="border-t border-black divide-y divide-black/10 my-auto">
           {DISCIPLINES_DATA.map((item) => {
             const isExpanded = expandedId === item.id;
             return (
               <StaggerItem key={item.id}>
-                <div className="py-6 transition-colors">
+                <div className="py-3.5 sm:py-4 transition-colors">
                   <button
                     onClick={() => toggleExpand(item.id)}
                     className="w-full flex items-start justify-between text-left gap-4 group cursor-pointer"
@@ -117,16 +117,16 @@ export function Disciplines({ onContactClick }: DisciplinesProps) {
                         {item.num}
                       </span>
                       <div className="flex-1">
-                        <h3 className="text-xl sm:text-2xl font-bold tracking-tight uppercase text-black group-hover:underline">
+                        <h3 className="text-lg sm:text-xl font-bold tracking-tight uppercase text-black group-hover:underline">
                           {item.title}
                         </h3>
-                        <p className="text-sm text-black/70 mt-1 font-normal">
+                        <p className="text-xs sm:text-sm text-black/70 mt-0.5 font-normal">
                           {item.tagline}
                         </p>
                       </div>
                     </div>
 
-                    <div className="p-2 border border-black/20 group-hover:border-black transition-colors shrink-0">
+                    <div className="p-1.5 border border-black/20 group-hover:border-black transition-colors shrink-0">
                       <ChevronDown
                         className={`w-4 h-4 text-black transition-transform duration-200 ${
                           isExpanded ? 'rotate-180' : ''
@@ -145,21 +145,21 @@ export function Disciplines({ onContactClick }: DisciplinesProps) {
                         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden"
                       >
-                        <div className="pt-6 sm:pl-20 mt-4 border-t border-black/5 grid grid-cols-1 md:grid-cols-12 gap-8">
+                        <div className="pt-4 sm:pl-20 mt-3 border-t border-black/5 grid grid-cols-1 md:grid-cols-12 gap-6">
                           <div className="md:col-span-7">
-                            <h4 className="text-xs font-mono uppercase tracking-wider text-black/50 mb-2">
+                            <h4 className="text-xs font-mono uppercase tracking-wider text-black/50 mb-1.5">
                               Approach
                             </h4>
-                            <p className="text-sm leading-relaxed text-black/80">
+                            <p className="text-xs sm:text-sm leading-relaxed text-black/80">
                               {item.details}
                             </p>
                           </div>
 
                           <div className="md:col-span-5">
-                            <h4 className="text-xs font-mono uppercase tracking-wider text-black/50 mb-3">
+                            <h4 className="text-xs font-mono uppercase tracking-wider text-black/50 mb-2">
                               Core Capabilities
                             </h4>
-                            <ul className="space-y-2 text-xs font-mono text-black">
+                            <ul className="space-y-1.5 text-xs font-mono text-black">
                               {item.capabilities.map((cap, i) => (
                                 <li key={i} className="flex items-center gap-2">
                                   <span className="w-1.5 h-1.5 bg-black inline-block" />
@@ -180,7 +180,7 @@ export function Disciplines({ onContactClick }: DisciplinesProps) {
 
         {/* CTA prompt */}
         <ScrollReveal delay={0.15} yOffset={20}>
-          <div className="mt-12 pt-8 border-t border-black/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-black/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <span className="text-xs font-mono uppercase text-black/60">
               Have a project spanning multiple disciplines?
             </span>

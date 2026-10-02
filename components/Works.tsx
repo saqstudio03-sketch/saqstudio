@@ -68,12 +68,12 @@ export function Works({ onContactClick }: WorksProps) {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <section id="works" className="border-b border-black/10 py-20 md:py-28 bg-transparent overflow-hidden scroll-mt-20">
-      <div className="w-full px-6 sm:px-10 lg:px-16">
+    <section id="works" className="relative border-b border-black/10 w-full min-h-[100dvh] min-h-[640px] flex flex-col justify-between py-10 md:py-14 bg-transparent overflow-hidden scroll-mt-20">
+      <div className="w-full px-6 sm:px-10 lg:px-16 flex-1 flex flex-col justify-between">
         {/* Section Header */}
         <ScrollReveal yOffset={20} duration={0.6}>
-          <div className="mb-12 sm:mb-14">
-            <div className="text-xs font-mono uppercase tracking-widest text-black/60 mb-2">
+          <div className="mb-6 sm:mb-8">
+            <div className="text-xs font-mono uppercase tracking-widest text-black/60 mb-1.5">
               Portfolio
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight uppercase text-black">
@@ -83,22 +83,22 @@ export function Works({ onContactClick }: WorksProps) {
         </ScrollReveal>
 
         {/* Works Display Grid */}
-        <StaggerContainer staggerDelay={0.08} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <StaggerContainer staggerDelay={0.08} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 flex-1 items-stretch">
           {PROJECTS_DATA.map((project) => (
             <StaggerItem key={project.id}>
               <div
                 onClick={() => setSelectedProject(project)}
-                className="group cursor-pointer border border-black p-6 bg-white/95 backdrop-blur-md flex flex-col justify-between hover:bg-white transition-all duration-200 h-full shadow-xs hover:shadow-md"
+                className="group cursor-pointer border border-black p-4 sm:p-5 lg:p-6 bg-white/95 backdrop-blur-md flex flex-col justify-between hover:bg-white transition-all duration-200 h-full shadow-xs hover:shadow-md"
               >
                 <div>
                   {/* Card Header */}
-                  <div className="flex items-center justify-between text-xs font-mono uppercase text-black/60 mb-4">
+                  <div className="flex items-center justify-between text-xs font-mono uppercase text-black/60 mb-3">
                     <span className="font-semibold text-black">{project.category}</span>
                     <span>{project.year}</span>
                   </div>
 
                   {/* Live Website Preview Window */}
-                  <div className="mb-6">
+                  <div className="mb-4">
                     <WebsitePreview
                       url={project.liveUrl || ''}
                       title={project.title}
@@ -109,18 +109,18 @@ export function Works({ onContactClick }: WorksProps) {
                   </div>
 
                   {/* Title & Arrow */}
-                  <h3 className="text-xl font-bold tracking-tight uppercase text-black mb-2 flex items-center justify-between">
+                  <h3 className="text-lg sm:text-xl font-bold tracking-tight uppercase text-black mb-2 flex items-center justify-between">
                     <span className="group-hover:underline">{project.title}</span>
                     <ArrowUpRight className="w-4 h-4 opacity-40 group-hover:opacity-100 transition-opacity" />
                   </h3>
 
-                  <p className="text-sm text-black/70 leading-relaxed mb-6 line-clamp-3">
+                  <p className="text-xs sm:text-sm text-black/70 leading-relaxed mb-4 line-clamp-2 sm:line-clamp-3">
                     {project.description}
                   </p>
                 </div>
 
                 {/* Card Footer with Direct Live Link & Case Study */}
-                <div className="border-t border-black/10 pt-4 flex items-center justify-between text-xs font-mono text-black/60">
+                <div className="border-t border-black/10 pt-3 flex items-center justify-between text-xs font-mono text-black/60 mt-auto">
                   <span className="truncate max-w-[130px]">{project.client}</span>
                   <div className="flex items-center gap-3">
                     {project.liveUrl && (
@@ -146,7 +146,7 @@ export function Works({ onContactClick }: WorksProps) {
         </StaggerContainer>
 
         {/* Bottom Note */}
-        <ScrollReveal delay={0.2} yOffset={16} className="mt-12 text-center">
+        <ScrollReveal delay={0.2} yOffset={16} className="mt-6 sm:mt-8 text-center">
           <p className="text-xs font-mono uppercase text-black/50">
             Archive contains {PROJECTS_DATA.length} featured productions · Complete case studies available upon inquiry
           </p>

@@ -91,12 +91,12 @@ export function Faq({ onContactClick }: FaqProps) {
   return (
     <section
       id="faq"
-      className="py-20 md:py-28 border-b border-black/10 bg-transparent overflow-hidden scroll-mt-20"
+      className="relative border-b border-black/10 w-full min-h-[100dvh] min-h-[640px] flex flex-col justify-between py-10 md:py-14 bg-transparent overflow-hidden scroll-mt-20"
     >
-      <div className="w-full px-6 sm:px-10 lg:px-16">
+      <div className="w-full px-6 sm:px-10 lg:px-16 flex-1 flex flex-col justify-between">
         {/* Section Header */}
         <ScrollReveal yOffset={20} duration={0.6}>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-6 sm:mb-8">
             <div>
               <div className="text-xs font-mono uppercase tracking-widest text-black/60 mb-2">
                 FAQ
@@ -122,13 +122,13 @@ export function Faq({ onContactClick }: FaqProps) {
         {/* FAQ Accordion List */}
         <StaggerContainer
           staggerDelay={0.06}
-          className="border-t border-black divide-y divide-black/10"
+          className="border-t border-black divide-y divide-black/10 my-auto"
         >
           {FAQS_DATA.map((item) => {
             const isOpen = openIds.includes(item.id);
             return (
               <StaggerItem key={item.id}>
-                <div className="py-6 transition-colors bg-transparent">
+                <div className="py-3 sm:py-3.5 transition-colors bg-transparent">
                   <button
                     type="button"
                     onClick={() => toggleItem(item.id)}
@@ -141,11 +141,11 @@ export function Faq({ onContactClick }: FaqProps) {
                         {item.num}
                       </span>
                       <div className="flex-1">
-                        <h3 className="text-lg sm:text-xl font-bold tracking-tight uppercase text-black group-hover:underline underline-offset-4">
+                        <h3 className="text-base sm:text-lg font-bold tracking-tight uppercase text-black group-hover:underline underline-offset-4">
                           {item.question}
                         </h3>
                         {!isOpen && (
-                          <p className="text-xs sm:text-sm text-black/60 mt-1 line-clamp-1 font-normal font-sans">
+                          <p className="text-xs sm:text-sm text-black/60 mt-0.5 line-clamp-1 font-normal font-sans">
                             {item.highlight || item.answer}
                           </p>
                         )}
@@ -153,7 +153,7 @@ export function Faq({ onContactClick }: FaqProps) {
                     </div>
 
                     <div
-                      className={`p-2 border transition-colors shrink-0 mt-0.5 ${
+                      className={`p-1.5 border transition-colors shrink-0 mt-0.5 ${
                         isOpen
                           ? 'border-black bg-black text-white'
                           : 'border-black/20 group-hover:border-black text-black bg-transparent'
@@ -177,12 +177,12 @@ export function Faq({ onContactClick }: FaqProps) {
                         transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden"
                       >
-                        <div className="pb-4 pt-3 sm:pl-20 border-t border-black/10 mt-4">
-                          <p className="text-sm sm:text-base leading-relaxed text-black/85 max-w-3xl mb-4 font-normal">
+                        <div className="pb-3 pt-2 sm:pl-20 border-t border-black/10 mt-3">
+                          <p className="text-xs sm:text-sm leading-relaxed text-black/85 max-w-3xl mb-3 font-normal">
                             {item.answer}
                           </p>
                           {item.highlight && (
-                            <div className="inline-flex items-center gap-2 px-3 py-1.5 border-l-2 border-black text-xs font-mono text-black/90 bg-transparent">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 border-l-2 border-black text-xs font-mono text-black/90 bg-transparent">
                               <span className="font-bold uppercase tracking-wider">Note:</span>
                               <span>{item.highlight}</span>
                             </div>

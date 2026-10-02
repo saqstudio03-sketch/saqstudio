@@ -45,7 +45,7 @@ export function Hero({ onExploreClick, onContactClick, onScrollDownClick }: Hero
   return (
     <section
       id="overview"
-      className="relative border-b border-black/10 w-full h-[100dvh] min-h-[640px] flex flex-col justify-between overflow-hidden bg-white scroll-mt-20"
+      className="relative border-b border-black/10 w-full min-h-[100dvh] min-h-[640px] flex flex-col justify-between overflow-hidden bg-white scroll-mt-20"
     >
       {/* Background Video Layer: Full Uploaded Video -> Seamless Infinite 1-Second Loop */}
       <div className="absolute inset-0 z-0 overflow-hidden">
