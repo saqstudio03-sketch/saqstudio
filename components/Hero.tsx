@@ -45,7 +45,7 @@ export function Hero({ onExploreClick, onContactClick, onScrollDownClick }: Hero
   return (
     <section
       id="overview"
-      className="relative border-b border-black/10 w-full h-[calc(100dvh-4rem)] min-h-[640px] flex flex-col justify-between overflow-hidden bg-white scroll-mt-20"
+      className="relative border-b border-black/10 w-full h-[100dvh] min-h-[640px] flex flex-col justify-between overflow-hidden bg-white scroll-mt-20"
     >
       {/* Background Video Layer: Full Uploaded Video -> Seamless Infinite 1-Second Loop */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -80,7 +80,7 @@ export function Hero({ onExploreClick, onContactClick, onScrollDownClick }: Hero
       </div>
 
       {/* Screen-Filling Foreground Container */}
-      <div className="relative z-10 w-full px-6 sm:px-10 lg:px-16 flex-1 flex flex-col justify-center py-6 sm:py-8 lg:py-10">
+      <div className="relative z-10 w-full px-6 sm:px-10 lg:px-16 flex-1 flex flex-col justify-center pt-20 pb-8 sm:pt-24 sm:pb-10">
         {/* Center: Grand Headline & Studio Manifesto */}
         <div className="max-w-6xl">
           {/* Studio Primary Title */}

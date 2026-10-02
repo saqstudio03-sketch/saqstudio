@@ -180,7 +180,7 @@ export function Header({ onNavigate }: HeaderProps) {
         y: { type: 'spring', stiffness: 280, damping: 28, mass: 0.75 },
         opacity: { duration: 0.2, ease: 'easeInOut' },
       }}
-      className="sticky top-0 z-40 bg-transparent pointer-events-none w-full"
+      className="fixed top-0 left-0 right-0 z-40 bg-transparent pointer-events-none w-full"
     >
       <div className="w-full px-6 sm:px-10 lg:px-16 h-16 flex items-center justify-between gap-4">
         {/* Zone 1: Logo */}
