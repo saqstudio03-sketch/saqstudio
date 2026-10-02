@@ -94,7 +94,7 @@ export function Contact({ onNavigate }: ContactProps = {}) {
   };
 
   return (
-    <section id="contact" className="relative py-28 md:py-36 lg:py-40 border-b border-black/10 bg-white overflow-hidden scroll-mt-20">
+    <section id="contact" className="relative border-b border-black/10 bg-white overflow-hidden scroll-mt-20 min-h-[100dvh] flex flex-col justify-between pt-16 pb-6 sm:pt-20 sm:pb-8">
       {/* Background Video Layer (Playing as continuous GIF loop) */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <video
@@ -112,55 +112,55 @@ export function Contact({ onNavigate }: ContactProps = {}) {
         </video>
       </div>
 
-      <div className="relative z-10 w-full px-6 sm:px-10 lg:px-16">
+      <div className="relative z-10 w-full px-6 sm:px-10 lg:px-16 flex-1 flex flex-col justify-between">
         {/* Section Header */}
         <ScrollReveal yOffset={20} duration={0.6}>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 sm:mb-20">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-4 sm:mb-6">
             <div>
-              <div className="text-xs font-mono uppercase tracking-widest text-black/60 mb-2">
+              <div className="text-xs font-mono uppercase tracking-widest text-black/60 mb-1">
                 Start A Project
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight uppercase text-black">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight uppercase text-black">
                 Let&apos;s build something great.
               </h2>
             </div>
-            <p className="text-sm sm:text-base text-black/70 max-w-md font-normal leading-relaxed">
+            <p className="text-xs sm:text-sm text-black/70 max-w-md font-normal leading-relaxed">
               Fill out the form to tell us about your vision. Your details will be sent directly to our WhatsApp so we can start the conversation instantly.
             </p>
           </div>
         </ScrollReveal>
 
-        {/* Contact Grid: Direct Line & Generously Spaced Form */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-16 sm:mb-24">
+        {/* Contact Grid: Direct Line & Adjusted Compact Form */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center my-auto py-2">
           {/* Left Column: Direct Studio Line & Coordinates (No borders) */}
           <ScrollReveal delay={0.1} yOffset={24} duration={0.7} className="lg:col-span-4">
-            <div className="p-3 sm:p-5 bg-transparent space-y-6 sm:space-y-8">
+            <div className="p-2 sm:p-3 bg-transparent space-y-3.5">
               <div>
-                <span className="block text-xs font-mono uppercase tracking-wider text-black/50 mb-1 flex items-center gap-1.5">
+                <span className="block text-xs font-mono uppercase tracking-wider text-black/50 mb-0.5 flex items-center gap-1.5">
                   <Phone className="w-3.5 h-3.5 text-black" />
                   <span>Direct Line</span>
                 </span>
                 <div className="flex items-center justify-between gap-2">
                   <a
                     href={`tel:${directPhone.replace(/\s+/g, '')}`}
-                    className="font-mono text-base sm:text-xl font-bold text-black hover:underline"
+                    className="font-mono text-base sm:text-lg font-bold text-black hover:underline"
                   >
                     {directPhone}
                   </a>
                   <button
                     type="button"
                     onClick={() => handleCopy(directPhone, 'phone')}
-                    className="p-1.5 hover:bg-black/5 rounded-md text-xs font-mono text-black transition-colors cursor-pointer"
+                    className="p-1 hover:bg-black/5 rounded-md text-xs font-mono text-black transition-colors cursor-pointer"
                     title="Copy phone number"
                     aria-label="Copy phone number"
                   >
-                    {copiedPhone ? <Check className="w-4 h-4 text-black" /> : <Copy className="w-4 h-4 text-black/60" />}
+                    {copiedPhone ? <Check className="w-3.5 h-3.5 text-black" /> : <Copy className="w-3.5 h-3.5 text-black/60" />}
                   </button>
                 </div>
               </div>
 
               <div>
-                <span className="block text-xs font-mono uppercase tracking-wider text-black/50 mb-1 flex items-center gap-1.5">
+                <span className="block text-xs font-mono uppercase tracking-wider text-black/50 mb-0.5 flex items-center gap-1.5">
                   <Mail className="w-3.5 h-3.5 text-black" />
                   <span>Email</span>
                 </span>
@@ -174,23 +174,23 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                   <button
                     type="button"
                     onClick={() => handleCopy(directEmail, 'email')}
-                    className="p-1.5 hover:bg-black/5 rounded-md text-xs font-mono text-black transition-colors cursor-pointer"
+                    className="p-1 hover:bg-black/5 rounded-md text-xs font-mono text-black transition-colors cursor-pointer"
                     title="Copy email address"
                     aria-label="Copy email address"
                   >
-                    {copiedEmail ? <Check className="w-4 h-4 text-black" /> : <Copy className="w-4 h-4 text-black/60" />}
+                    {copiedEmail ? <Check className="w-3.5 h-3.5 text-black" /> : <Copy className="w-3.5 h-3.5 text-black/60" />}
                   </button>
                 </div>
               </div>
 
               <div>
-                <span className="block text-xs font-mono uppercase tracking-wider text-black/50 mb-1.5 flex items-center gap-1.5">
+                <span className="block text-xs font-mono uppercase tracking-wider text-black/50 mb-1 flex items-center gap-1.5">
                   <MessageSquare className="w-3.5 h-3.5 text-black" />
                   <span>Instant Messaging</span>
                 </span>
                 <a
                   href={`https://wa.me/${directPhoneRaw}?text=${encodeURIComponent("Hello SAQ Studio! I'd like to discuss a new website project.")}`}
-                  className="inline-flex items-center justify-between w-full px-4 py-2.5 bg-black text-white text-xs font-mono uppercase tracking-wider rounded-md hover:bg-neutral-800 transition-all group"
+                  className="inline-flex items-center justify-between w-full px-3.5 py-2 bg-black text-white text-xs font-mono uppercase tracking-wider rounded-md hover:bg-neutral-800 transition-all group"
                 >
                   <span>Chat on WhatsApp</span>
                   <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
@@ -199,32 +199,32 @@ export function Contact({ onNavigate }: ContactProps = {}) {
             </div>
           </ScrollReveal>
 
-          {/* Right Column: Inquiry Form (Smooth border, transparent, spacious) */}
+          {/* Right Column: Inquiry Form (Smooth border, transparent, perfectly proportioned) */}
           <ScrollReveal delay={0.2} yOffset={24} duration={0.7} className="lg:col-span-8">
             {submitted ? (
-              <div className="rounded-2xl border border-black/30 p-8 sm:p-12 text-center bg-transparent space-y-5">
-                <div className="w-12 h-12 mx-auto rounded-full border border-black flex items-center justify-center">
-                  <Check className="w-6 h-6 text-black" />
+              <div className="rounded-2xl border border-black/30 p-6 sm:p-8 text-center bg-transparent space-y-4">
+                <div className="w-10 h-10 mx-auto rounded-full border border-black flex items-center justify-center">
+                  <Check className="w-5 h-5 text-black" />
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-black">
+                <h3 className="text-xl sm:text-2xl font-bold uppercase tracking-tight text-black">
                   Inquiry Dispatched to WhatsApp
                 </h3>
-                <p className="text-sm sm:text-base text-black/80 max-w-lg mx-auto leading-relaxed">
+                <p className="text-xs sm:text-sm text-black/80 max-w-lg mx-auto leading-relaxed">
                   Thank you, <span className="font-semibold text-black">{formData.name}</span>. Your project brief has been formatted. If WhatsApp did not open automatically, click the button below to continue:
                 </p>
                 {lastWhatsAppUrl && (
-                  <div className="pt-2 flex flex-wrap justify-center gap-3">
+                  <div className="pt-1 flex flex-wrap justify-center gap-3">
                     <a
                       href={lastWhatsAppUrl}
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white text-xs font-semibold uppercase tracking-wider rounded-full hover:bg-neutral-800 transition-all cursor-pointer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-black text-white text-xs font-semibold uppercase tracking-wider rounded-full hover:bg-neutral-800 transition-all cursor-pointer"
                     >
                       <span>Open WhatsApp Chat</span>
-                      <ExternalLink className="w-4 h-4" />
+                      <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                     <button
                       type="button"
                       onClick={handleReset}
-                      className="px-6 py-3 border border-black rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-black hover:text-white transition-colors cursor-pointer"
+                      className="px-5 py-2.5 border border-black rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-black hover:text-white transition-colors cursor-pointer"
                     >
                       Fill Another Form
                     </button>
@@ -232,16 +232,16 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                 )}
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="rounded-2xl border border-black/30 p-6 sm:p-8 bg-transparent space-y-5 sm:space-y-6">
-                <div className="text-xs font-mono uppercase tracking-wider text-black/60 border-b border-black/10 pb-3 flex items-center justify-between">
+              <form onSubmit={handleSubmit} className="rounded-2xl border border-black/30 p-4 sm:p-5 bg-transparent space-y-3">
+                <div className="text-xs font-mono uppercase tracking-wider text-black/60 border-b border-black/10 pb-2 flex items-center justify-between">
                   <span>Project Vision & Details</span>
                   <span className="text-[11px] text-black/40">* Required fields</span>
                 </div>
 
                 {/* Row 1: Name, Phone, Email in 3 columns on tablet/desktop */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div>
-                    <label htmlFor="name" className="block text-xs font-mono uppercase text-black/70 mb-1.5">
+                    <label htmlFor="name" className="block text-[11px] font-mono uppercase text-black/70 mb-1">
                       Your Name *
                     </label>
                     <input
@@ -251,12 +251,12 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                       placeholder="John Doe"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-transparent border border-black/25 rounded-lg px-3.5 py-2.5 sm:py-3 text-sm text-black placeholder:text-black/40 focus:outline-hidden focus:border-black transition-colors"
+                      className="w-full bg-transparent border border-black/25 rounded-lg px-3 py-1.5 text-sm text-black placeholder:text-black/40 focus:outline-hidden focus:border-black transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="phone" className="block text-xs font-mono uppercase text-black/70 mb-1.5">
+                    <label htmlFor="phone" className="block text-[11px] font-mono uppercase text-black/70 mb-1">
                       Phone Number *
                     </label>
                     <input
@@ -266,12 +266,12 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                       placeholder="+1 (555) 000-0000"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full bg-transparent border border-black/25 rounded-lg px-3.5 py-2.5 sm:py-3 text-sm text-black placeholder:text-black/40 focus:outline-hidden focus:border-black transition-colors"
+                      className="w-full bg-transparent border border-black/25 rounded-lg px-3 py-1.5 text-sm text-black placeholder:text-black/40 focus:outline-hidden focus:border-black transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-xs font-mono uppercase text-black/70 mb-1.5">
+                    <label htmlFor="email" className="block text-[11px] font-mono uppercase text-black/70 mb-1">
                       Email Address *
                     </label>
                     <input
@@ -281,22 +281,22 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                       placeholder="john@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-transparent border border-black/25 rounded-lg px-3.5 py-2.5 sm:py-3 text-sm text-black placeholder:text-black/40 focus:outline-hidden focus:border-black transition-colors"
+                      className="w-full bg-transparent border border-black/25 rounded-lg px-3 py-1.5 text-sm text-black placeholder:text-black/40 focus:outline-hidden focus:border-black transition-colors"
                     />
                   </div>
                 </div>
 
                 {/* Row 2: Industry & Service Needed */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label htmlFor="industry" className="block text-xs font-mono uppercase text-black/70 mb-1.5">
+                    <label htmlFor="industry" className="block text-[11px] font-mono uppercase text-black/70 mb-1">
                       Industry
                     </label>
                     <select
                       id="industry"
                       value={formData.industry}
                       onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
-                      className="w-full bg-transparent border border-black/25 rounded-lg px-3.5 py-2.5 sm:py-3 text-sm text-black focus:outline-hidden focus:border-black transition-colors"
+                      className="w-full bg-transparent border border-black/25 rounded-lg px-3 py-1.5 text-sm text-black focus:outline-hidden focus:border-black transition-colors"
                     >
                       <option value="" className="bg-white text-black">Select industry</option>
                       <option value="E-Commerce & Retail" className="bg-white text-black">E-Commerce & Retail</option>
@@ -311,14 +311,14 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                   </div>
 
                   <div>
-                    <label htmlFor="serviceNeeded" className="block text-xs font-mono uppercase text-black/70 mb-1.5">
+                    <label htmlFor="serviceNeeded" className="block text-[11px] font-mono uppercase text-black/70 mb-1">
                       Service Needed
                     </label>
                     <select
                       id="serviceNeeded"
                       value={formData.serviceNeeded}
                       onChange={(e) => setFormData({ ...formData, serviceNeeded: e.target.value })}
-                      className="w-full bg-transparent border border-black/25 rounded-lg px-3.5 py-2.5 sm:py-3 text-sm text-black focus:outline-hidden focus:border-black transition-colors"
+                      className="w-full bg-transparent border border-black/25 rounded-lg px-3 py-1.5 text-sm text-black focus:outline-hidden focus:border-black transition-colors"
                     >
                       <option value="" className="bg-white text-black">Select service</option>
                       <option value="High-Performance Web Development" className="bg-white text-black">High-Performance Web Development</option>
@@ -334,25 +334,25 @@ export function Contact({ onNavigate }: ContactProps = {}) {
 
                 {/* Row 3: Project Details */}
                 <div>
-                  <label htmlFor="projectDetails" className="block text-xs font-mono uppercase text-black/70 mb-1.5">
+                  <label htmlFor="projectDetails" className="block text-[11px] font-mono uppercase text-black/70 mb-1">
                     Project Details
                   </label>
                   <textarea
                     id="projectDetails"
-                    rows={4}
+                    rows={2}
                     placeholder="Tell us about your project vision, target audience, specific requirements, or reference links..."
                     value={formData.projectDetails}
                     onChange={(e) => setFormData({ ...formData, projectDetails: e.target.value })}
-                    className="w-full bg-transparent border border-black/25 rounded-lg p-3.5 text-sm text-black placeholder:text-black/40 focus:outline-hidden focus:border-black transition-colors resize-y min-h-[90px]"
+                    className="w-full bg-transparent border border-black/25 rounded-lg p-2.5 text-sm text-black placeholder:text-black/40 focus:outline-hidden focus:border-black transition-colors resize-y min-h-[58px]"
                   />
                 </div>
 
                 {/* Row 4: Submit Button */}
-                <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="pt-0.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-black text-white text-xs font-semibold uppercase tracking-wider rounded-full hover:bg-neutral-800 transition-all shadow-xs cursor-pointer hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-black text-white text-xs font-semibold uppercase tracking-wider rounded-full hover:bg-neutral-800 transition-all shadow-xs cursor-pointer hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50"
                   >
                     {isSubmitting ? (
                       <span>Preparing WhatsApp...</span>
@@ -374,8 +374,8 @@ export function Contact({ onNavigate }: ContactProps = {}) {
         </div>
 
         {/* Integrated Footer (Inside same section over background video) */}
-        <div className="border-t border-black/15 pt-12 sm:pt-16">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 sm:pb-8">
+        <div className="border-t border-black/15 pt-5 sm:pt-6 mt-4">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-3">
             {/* Brand Logo & Mission */}
             <div className="flex items-center gap-3">
               <button
@@ -461,7 +461,7 @@ export function Contact({ onNavigate }: ContactProps = {}) {
           </div>
 
           {/* Bottom Copyright bar */}
-          <div className="pt-6 sm:pt-8 border-t border-black/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono text-black/50">
+          <div className="pt-3 border-t border-black/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono text-black/50">
             <div>
               © {new Date().getFullYear()} SAQ STUDIO. All rights reserved.
             </div>
