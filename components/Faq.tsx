@@ -128,19 +128,19 @@ export function Faq({ onContactClick }: FaqProps) {
             const isOpen = openIds.includes(item.id);
             return (
               <StaggerItem key={item.id}>
-                <div className="group transition-colors bg-white/90 backdrop-blur-xs hover:bg-white">
+                <div className="py-6 transition-colors bg-transparent">
                   <button
                     type="button"
                     onClick={() => toggleItem(item.id)}
                     aria-expanded={isOpen}
                     aria-controls={`faq-answer-${item.id}`}
-                    className="w-full py-5 sm:py-6 px-4 sm:px-6 flex items-start justify-between gap-6 text-left cursor-pointer select-none"
+                    className="w-full flex items-start justify-between gap-6 text-left cursor-pointer select-none group"
                   >
-                    <div className="flex items-start gap-4 sm:gap-8">
+                    <div className="flex items-start gap-4 sm:gap-8 flex-1">
                       <span className="text-xs font-mono font-bold text-black/40 group-hover:text-black transition-colors pt-1">
                         /{item.num}
                       </span>
-                      <div>
+                      <div className="flex-1">
                         <h3 className="text-lg sm:text-xl font-bold tracking-tight uppercase text-black group-hover:underline underline-offset-4">
                           {item.question}
                         </h3>
@@ -153,10 +153,10 @@ export function Faq({ onContactClick }: FaqProps) {
                     </div>
 
                     <div
-                      className={`p-2 border transition-all shrink-0 mt-0.5 ${
+                      className={`p-2 border transition-colors shrink-0 mt-0.5 ${
                         isOpen
                           ? 'border-black bg-black text-white'
-                          : 'border-black/20 group-hover:border-black text-black bg-white'
+                          : 'border-black/20 group-hover:border-black text-black bg-transparent'
                       }`}
                     >
                       <ChevronDown
@@ -177,12 +177,12 @@ export function Faq({ onContactClick }: FaqProps) {
                         transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden"
                       >
-                        <div className="pb-6 pt-2 px-4 sm:px-6 sm:pl-20 border-t border-black/5">
-                          <p className="text-sm sm:text-base leading-relaxed text-black/80 max-w-3xl mb-4 font-normal">
+                        <div className="pb-4 pt-3 sm:pl-12 md:pl-16 border-t border-black/10 mt-4">
+                          <p className="text-sm sm:text-base leading-relaxed text-black/85 max-w-3xl mb-4 font-normal">
                             {item.answer}
                           </p>
                           {item.highlight && (
-                            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-neutral-100 border-l-2 border-black text-xs font-mono text-black/90">
+                            <div className="inline-flex items-center gap-2 px-3 py-1.5 border-l-2 border-black text-xs font-mono text-black/90 bg-transparent">
                               <span className="font-bold uppercase tracking-wider">Note:</span>
                               <span>{item.highlight}</span>
                             </div>

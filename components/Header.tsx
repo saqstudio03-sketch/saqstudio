@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
-import { motion, AnimatePresence, useScroll, useSpring } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 
 interface HeaderProps {
   onNavigate: (id: string) => void;
@@ -18,14 +18,6 @@ export function Header({ onNavigate }: HeaderProps) {
   // Lock scroll-spy updates temporarily when user explicitly clicks a nav item
   const isNavigatingRef = useRef(false);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Smooth scroll progress bar at header bottom
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 25,
-    restDelta: 0.001,
-  });
 
   const navItems = [
     { label: 'Home', id: 'overview' },
@@ -324,11 +316,6 @@ export function Header({ onNavigate }: HeaderProps) {
         )}
       </AnimatePresence>
 
-      {/* 1.5px Animated Scroll Progress Line */}
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-black origin-left z-50 pointer-events-none"
-        style={{ scaleX }}
-      />
     </header>
   );
 }
