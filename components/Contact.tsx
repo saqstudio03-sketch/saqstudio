@@ -9,11 +9,8 @@ export function Contact() {
     name: '',
     phone: '',
     email: '',
-    businessName: '',
     industry: '',
     serviceNeeded: '',
-    budget: '',
-    timeline: '',
     projectDetails: '',
   });
 
@@ -50,11 +47,8 @@ export function Contact() {
       `*Name:* ${formData.name}`,
       `*Phone:* ${formData.phone}`,
       `*Email:* ${formData.email}`,
-      formData.businessName ? `*Business Name:* ${formData.businessName}` : null,
       formData.industry ? `*Industry:* ${formData.industry}` : null,
       formData.serviceNeeded ? `*Service Needed:* ${formData.serviceNeeded}` : null,
-      formData.budget ? `*Budget Range:* ${formData.budget}` : null,
-      formData.timeline ? `*Timeline:* ${formData.timeline}` : null,
       ``,
       formData.projectDetails ? `*Project Details:*\n${formData.projectDetails}` : null,
     ].filter(Boolean).join('\n');
@@ -75,11 +69,8 @@ export function Contact() {
       name: '',
       phone: '',
       email: '',
-      businessName: '',
       industry: '',
       serviceNeeded: '',
-      budget: '',
-      timeline: '',
       projectDetails: '',
     });
     setSubmitted(false);
@@ -173,17 +164,6 @@ export function Contact() {
                 </a>
               </div>
             </div>
-
-            {/* Response Time Guarantee */}
-            <div className="border border-black/20 p-5 bg-neutral-50/70 text-xs font-mono text-black/80 space-y-2">
-              <div className="font-bold uppercase tracking-wider text-black flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>Instant Direct Dispatch</span>
-              </div>
-              <p className="leading-relaxed text-black/60">
-                Form submissions automatically pre-fill your structured project inquiry into WhatsApp for immediate triage by our principal developers.
-              </p>
-            </div>
           </ScrollReveal>
 
           {/* Right Column: Inquiry Form */}
@@ -258,36 +238,20 @@ export function Contact() {
                   </div>
                 </div>
 
-                {/* Row 2: Email & Business Name */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="email" className="block text-xs font-mono uppercase text-black/70 mb-2">
-                      Email Address *
-                    </label>
-                    <input
-                      id="email"
-                      type="email"
-                      required
-                      placeholder="john@example.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-white border border-black/30 px-3.5 py-2.5 text-sm text-black placeholder:text-black/30 focus:outline-hidden focus:border-black transition-colors"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="businessName" className="block text-xs font-mono uppercase text-black/70 mb-2">
-                      Business Name
-                    </label>
-                    <input
-                      id="businessName"
-                      type="text"
-                      placeholder="Acme Corp"
-                      value={formData.businessName}
-                      onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
-                      className="w-full bg-white border border-black/30 px-3.5 py-2.5 text-sm text-black placeholder:text-black/30 focus:outline-hidden focus:border-black transition-colors"
-                    />
-                  </div>
+                {/* Row 2: Email Address */}
+                <div>
+                  <label htmlFor="email" className="block text-xs font-mono uppercase text-black/70 mb-2">
+                    Email Address *
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    required
+                    placeholder="john@example.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full bg-white border border-black/30 px-3.5 py-2.5 text-sm text-black placeholder:text-black/30 focus:outline-hidden focus:border-black transition-colors"
+                  />
                 </div>
 
                 {/* Row 3: Industry & Service Needed */}
@@ -332,48 +296,6 @@ export function Contact() {
                       <option value="Conversion Optimization (CRO)">Conversion Optimization (CRO)</option>
                       <option value="Bespoke Digital Experience">Bespoke Digital Experience</option>
                       <option value="Other">Other</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Row 4: Budget Range & Timeline */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="budget" className="block text-xs font-mono uppercase text-black/70 mb-2">
-                      Budget Range
-                    </label>
-                    <select
-                      id="budget"
-                      value={formData.budget}
-                      onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                      className="w-full bg-white border border-black/30 px-3.5 py-2.5 text-sm text-black focus:outline-hidden focus:border-black transition-colors"
-                    >
-                      <option value="">Select budget</option>
-                      <option value="Under $2,500">Under $2,500</option>
-                      <option value="$2,500 - $5,000">$2,500 - $5,000</option>
-                      <option value="$5,000 - $10,000">$5,000 - $10,000</option>
-                      <option value="$10,000 - $25,000">$10,000 - $25,000</option>
-                      <option value="$25,000+">$25,000+</option>
-                      <option value="Flexible / Let's Discuss">Flexible / Let&apos;s Discuss</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label htmlFor="timeline" className="block text-xs font-mono uppercase text-black/70 mb-2">
-                      Timeline
-                    </label>
-                    <select
-                      id="timeline"
-                      value={formData.timeline}
-                      onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
-                      className="w-full bg-white border border-black/30 px-3.5 py-2.5 text-sm text-black focus:outline-hidden focus:border-black transition-colors"
-                    >
-                      <option value="">Select timeline</option>
-                      <option value="Urgent (< 2 weeks)">Urgent (&lt; 2 weeks)</option>
-                      <option value="2 - 4 weeks">2 - 4 weeks</option>
-                      <option value="1 - 2 months">1 - 2 months</option>
-                      <option value="2+ months">2+ months</option>
-                      <option value="Flexible">Flexible</option>
                     </select>
                   </div>
                 </div>
