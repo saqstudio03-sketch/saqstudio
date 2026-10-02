@@ -94,7 +94,7 @@ export function Contact({ onNavigate }: ContactProps = {}) {
   };
 
   return (
-    <section id="contact" className="relative pt-12 md:pt-16 pb-8 md:pb-10 bg-white overflow-hidden scroll-mt-20">
+    <section id="contact" className="relative py-20 md:py-28 border-b border-black/10 bg-white overflow-hidden scroll-mt-20">
       {/* Background Video Layer (Playing as continuous GIF loop) */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <video
@@ -115,9 +115,9 @@ export function Contact({ onNavigate }: ContactProps = {}) {
       <div className="relative z-10 w-full px-6 sm:px-10 lg:px-16">
         {/* Section Header */}
         <ScrollReveal yOffset={20} duration={0.6}>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
             <div>
-              <div className="text-xs font-mono uppercase tracking-widest text-black/60 mb-1">
+              <div className="text-xs font-mono uppercase tracking-widest text-black/60 mb-2">
                 Start A Project
               </div>
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight uppercase text-black">
@@ -131,7 +131,7 @@ export function Contact({ onNavigate }: ContactProps = {}) {
         </ScrollReveal>
 
         {/* Contact Grid: Direct Line & Adjusted Compact Form */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start mb-8 sm:mb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start mb-10 sm:mb-12">
           {/* Left Column: Direct Studio Line & Coordinates (No borders) */}
           <ScrollReveal delay={0.1} yOffset={24} duration={0.7} className="lg:col-span-4">
             <div className="p-2 sm:p-3 bg-transparent space-y-3">
@@ -374,7 +374,7 @@ export function Contact({ onNavigate }: ContactProps = {}) {
         </div>
 
         {/* Integrated Footer (Inside same section over background video) */}
-        <div className="border-t border-black/15 pt-6">
+        <div className="border-t border-black/15 pt-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4">
             {/* Brand Logo & Mission */}
             <div className="flex items-center gap-3">
