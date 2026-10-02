@@ -81,7 +81,7 @@ export function Disciplines({ onContactClick }: DisciplinesProps) {
   };
 
   return (
-    <section id="disciplines" className="border-b border-black/10 py-20 md:py-28 bg-transparent overflow-hidden">
+    <section id="disciplines" className="border-b border-black/10 py-20 md:py-28 bg-transparent overflow-hidden scroll-mt-20">
       <div className="w-full px-6 sm:px-10 lg:px-16">
         {/* Section Header */}
         <ScrollReveal yOffset={20} duration={0.6}>

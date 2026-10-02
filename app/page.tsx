@@ -13,9 +13,19 @@ import { ScrollSequenceBackground } from '@/components/ScrollSequenceBackground'
 
 export default function HomePage() {
   const scrollToSection = (id: string) => {
+    if (id === 'overview') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      const headerOffset = 64;
+      const elementPosition = el.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+      window.scrollTo({
+        top: Math.max(0, offsetPosition),
+        behavior: 'smooth',
+      });
     }
   };
 

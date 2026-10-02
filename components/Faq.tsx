@@ -91,7 +91,7 @@ export function Faq({ onContactClick }: FaqProps) {
   return (
     <section
       id="faq"
-      className="py-20 md:py-28 border-b border-black/10 bg-transparent overflow-hidden"
+      className="py-20 md:py-28 border-b border-black/10 bg-transparent overflow-hidden scroll-mt-20"
     >
       <div className="w-full px-6 sm:px-10 lg:px-16">
         {/* Section Header */}

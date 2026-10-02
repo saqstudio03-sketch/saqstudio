@@ -76,7 +76,7 @@ export function Works({ onContactClick }: WorksProps) {
     : PROJECTS_DATA.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="works" className="border-b border-black/10 py-20 md:py-28 bg-transparent overflow-hidden">
+    <section id="works" className="border-b border-black/10 py-20 md:py-28 bg-transparent overflow-hidden scroll-mt-20">
       <div className="w-full px-6 sm:px-10 lg:px-16">
         {/* Section Header with Controls */}
         <ScrollReveal yOffset={20} duration={0.6}>

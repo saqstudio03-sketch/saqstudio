@@ -5,7 +5,7 @@ import { ScrollReveal, StaggerContainer, StaggerItem } from './ScrollReveal';
 
 export function About() {
   return (
-    <section id="about" className="border-b border-black/10 py-20 md:py-28 bg-transparent overflow-hidden">
+    <section id="about" className="border-b border-black/10 py-20 md:py-28 bg-transparent overflow-hidden scroll-mt-20">
       <div className="w-full px-6 sm:px-10 lg:px-16">
         {/* Section Header */}
         <ScrollReveal yOffset={20} duration={0.6}>

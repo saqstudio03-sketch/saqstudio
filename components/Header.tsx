@@ -39,27 +39,63 @@ export function Header({ onNavigate }: HeaderProps) {
   useEffect(() => {
     let ticking = false;
 
+    const checkActiveSection = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      // 1. Top of page: always Home (overview)
+      if (scrollY < 80) {
+        setActiveSection('overview');
+        return;
+      }
+
+      // 2. Bottom of page: always Contact
+      if (scrollY + windowHeight >= documentHeight - 60) {
+        setActiveSection('contact');
+        return;
+      }
+
+      // 3. Focal line: 160px from viewport top (accounting for 64px header + visual bias)
+      const focalY = 160;
+
+      // Find the section that covers the focal point (checked in reverse order)
+      for (let i = navItems.length - 1; i >= 0; i--) {
+        const item = navItems[i];
+        const el = document.getElementById(item.id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= focalY && rect.bottom > 80) {
+            setActiveSection(item.id);
+            return;
+          }
+        }
+      }
+
+      // Fallback: which section top is closest to focalY
+      let closestId = 'overview';
+      let closestDist = Infinity;
+      for (const item of navItems) {
+        const el = document.getElementById(item.id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          const dist = Math.abs(rect.top - focalY);
+          if (dist < closestDist) {
+            closestDist = dist;
+            closestId = item.id;
+          }
+        }
+      }
+      setActiveSection(closestId);
+    };
+
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           setIsScrolled(window.scrollY > 20);
 
           if (!isNavigatingRef.current) {
-            const sectionElements = navItems.map((item) => ({
-              id: item.id,
-              el: document.getElementById(item.id),
-            }));
-
-            // Header offset + viewport bias for smooth spy
-            const scrollPos = window.scrollY + 180;
-
-            for (let i = sectionElements.length - 1; i >= 0; i--) {
-              const { id, el } = sectionElements[i];
-              if (el && el.offsetTop <= scrollPos) {
-                setActiveSection(id);
-                break;
-              }
-            }
+            checkActiveSection();
           }
           ticking = false;
         });
@@ -67,10 +103,24 @@ export function Header({ onNavigate }: HeaderProps) {
       }
     };
 
+    const handleUserInteraction = () => {
+      if (isNavigatingRef.current) {
+        isNavigatingRef.current = false;
+        if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    window.addEventListener('wheel', handleUserInteraction, { passive: true });
+    window.addEventListener('touchstart', handleUserInteraction, { passive: true });
+
+    // Initial check on mount
+    checkActiveSection();
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('wheel', handleUserInteraction);
+      window.removeEventListener('touchstart', handleUserInteraction);
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
     };
   }, []);
@@ -123,15 +173,14 @@ export function Header({ onNavigate }: HeaderProps) {
           </motion.button>
         </div>
 
-        {/* Zone 2: Smooth Floating Navigation Capsule */}
+        {/* Zone 2: Navigation Capsule with Active Pill Indicator */}
         <nav
           className="hidden md:flex items-center gap-1 p-1 bg-black/[0.04] border border-black/10 rounded-full text-xs font-mono uppercase tracking-wider backdrop-blur-xs shadow-2xs"
           onMouseLeave={() => setHoveredNav(null)}
         >
           {navItems.map((item) => {
-            const isHovered = hoveredNav === item.id;
             const isActive = activeSection === item.id;
-            const isHighlighted = (hoveredNav ?? activeSection) === item.id;
+            const isHovered = hoveredNav === item.id;
 
             return (
               <button
@@ -141,28 +190,37 @@ export function Header({ onNavigate }: HeaderProps) {
                 onMouseEnter={() => setHoveredNav(item.id)}
                 className="relative px-4 py-1.5 rounded-full cursor-pointer select-none text-[11px] font-mono tracking-widest uppercase transition-colors"
               >
-                {/* Unified sliding capsule indicator */}
-                {isHighlighted && (
+                {/* Active Section Sliding Indicator Pill */}
+                {isActive && (
                   <motion.div
-                    layoutId="navSlidingPill"
+                    layoutId="navActivePill"
                     transition={{
                       type: 'spring',
                       stiffness: 420,
                       damping: 32,
                       mass: 0.6,
                     }}
-                    className={`absolute inset-0 rounded-full z-0 ${
-                      hoveredNav && !isActive
-                        ? 'bg-white/80 border border-black/10 shadow-2xs'
-                        : 'bg-white border border-black/10 shadow-xs'
-                    }`}
+                    className="absolute inset-0 bg-white border border-black/10 rounded-full z-0 shadow-xs"
+                  />
+                )}
+
+                {/* Subtle Hover Capsule (when hovering an inactive item) */}
+                {isHovered && !isActive && (
+                  <motion.div
+                    layoutId="navHoverPill"
+                    transition={{
+                      type: 'spring',
+                      stiffness: 450,
+                      damping: 35,
+                    }}
+                    className="absolute inset-0 bg-black/[0.05] rounded-full z-0"
                   />
                 )}
 
                 <span
                   className={`relative z-10 transition-colors duration-200 ${
                     isActive
-                      ? 'text-black font-semibold'
+                      ? 'text-black font-bold'
                       : isHovered
                       ? 'text-black font-medium'
                       : 'text-black/60 hover:text-black font-medium'
