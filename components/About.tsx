@@ -17,48 +17,15 @@ export function About() {
           </h2>
         </ScrollReveal>
 
-        {/* Studio Manifesto Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
-          <ScrollReveal delay={0.1} yOffset={24} duration={0.7} className="md:col-span-7 space-y-6 text-lg sm:text-2xl leading-relaxed text-black/90">
+        {/* Studio Manifesto */}
+        <div className="max-w-4xl">
+          <ScrollReveal delay={0.1} yOffset={24} duration={0.7} className="space-y-6 text-lg sm:text-2xl md:text-3xl leading-relaxed text-black/90">
             <p className="font-semibold text-black leading-snug">
               SAQ Studio is a premium web development studio focused on creating high-performance, conversion-driven websites.
             </p>
             <p className="text-base sm:text-lg text-black/80 font-normal leading-relaxed">
               We combine modern technology, elegant design, and measurable business growth to build digital experiences that stand out in today&apos;s competitive landscape.
             </p>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.2} yOffset={24} duration={0.7} className="md:col-span-5 border border-black p-6 sm:p-8 bg-white/80 backdrop-blur-md shadow-xs">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-black/60 mb-6">
-              Studio Benchmarks
-            </h3>
-
-            <div className="divide-y divide-black/10 text-xs font-mono">
-              <div className="py-3 flex justify-between">
-                <span className="text-black/50">Core Focus</span>
-                <span className="font-semibold text-black">Web Development & Architecture</span>
-              </div>
-              <div className="py-3 flex justify-between">
-                <span className="text-black/50">Specialization</span>
-                <span className="font-semibold text-black">High-Performance & Conversion</span>
-              </div>
-              <div className="py-3 flex justify-between">
-                <span className="text-black/50">Technology Stack</span>
-                <span className="font-semibold text-black">Next.js, React, TypeScript</span>
-              </div>
-              <div className="py-3 flex justify-between">
-                <span className="text-black/50">Standard</span>
-                <span className="font-semibold text-black">95+ Core Web Vitals</span>
-              </div>
-              <div className="py-3 flex justify-between">
-                <span className="text-black/50">Engagement</span>
-                <span className="font-semibold text-black">Custom Bespoke Solutions</span>
-              </div>
-            </div>
-
-            <div className="mt-6 pt-4 border-t border-black/10 text-[11px] text-black/60 leading-normal font-mono">
-              Direct inquiries and commissions are reviewed by our lead engineering partners.
-            </div>
           </ScrollReveal>
         </div>
 
