@@ -13,11 +13,12 @@ export function Header({ onNavigate }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('overview');
   const [hoveredNav, setHoveredNav] = useState<string | null>(null);
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
-  // Directional scroll tracking for smart hide/reveal
+  // Directional scroll tracking for smart hide/reveal with accumulated delta
   const lastScrollYRef = useRef(0);
+  const accumulatedDownRef = useRef(0);
+  const accumulatedUpRef = useRef(0);
 
   // Lock scroll-spy updates temporarily when user explicitly clicks a nav item
   const isNavigatingRef = useRef(false);
@@ -88,25 +89,40 @@ export function Header({ onNavigate }: HeaderProps) {
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          const currentScrollY = window.scrollY;
+          const currentScrollY = Math.max(0, window.scrollY);
           const delta = currentScrollY - lastScrollYRef.current;
 
-          setIsScrolled(currentScrollY > 20);
-
-          // Smart hide/reveal on scroll direction
+          // 1. Always reveal and reset at/near the top of the page
           if (currentScrollY <= 60) {
             setIsVisible(true);
+            accumulatedDownRef.current = 0;
+            accumulatedUpRef.current = 0;
           } else if (mobileMenuOpen || isNavigatingRef.current) {
             setIsVisible(true);
-          } else if (delta > 6 && currentScrollY > 100) {
-            // Scrolling down -> hide header
-            setIsVisible(false);
-          } else if (delta < -6) {
-            // Scrolling up -> reveal header
-            setIsVisible(true);
+          } else {
+            // 2. Accumulated directional scroll detection for buttery smooth transitions
+            if (delta > 0) {
+              // Scrolling down
+              accumulatedDownRef.current += delta;
+              accumulatedUpRef.current = 0;
+
+              // Hide header upon sustained downward intent beyond the hero threshold
+              if (accumulatedDownRef.current > 35 && currentScrollY > 80) {
+                setIsVisible(false);
+              }
+            } else if (delta < 0) {
+              // Scrolling up
+              accumulatedUpRef.current += Math.abs(delta);
+              accumulatedDownRef.current = 0;
+
+              // Reveal header swiftly upon upward scroll intent
+              if (accumulatedUpRef.current > 15) {
+                setIsVisible(true);
+              }
+            }
           }
 
-          lastScrollYRef.current = Math.max(0, currentScrollY);
+          lastScrollYRef.current = currentScrollY;
 
           if (!isNavigatingRef.current) {
             checkActiveSection();
@@ -155,18 +171,20 @@ export function Header({ onNavigate }: HeaderProps) {
 
   return (
     <motion.header
-      initial={{ y: 0 }}
-      animate={{ y: isVisible ? 0 : -80 }}
-      transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-      className={`sticky top-0 z-40 transition-colors duration-300 ${
-        isScrolled
-          ? 'bg-white/90 backdrop-blur-md shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)] border-b border-black/10'
-          : 'bg-white/70 backdrop-blur-xs border-b border-black/10'
-      }`}
+      initial={{ y: 0, opacity: 1 }}
+      animate={{
+        y: isVisible ? 0 : -90,
+        opacity: isVisible ? 1 : 0,
+      }}
+      transition={{
+        y: { type: 'spring', stiffness: 280, damping: 28, mass: 0.75 },
+        opacity: { duration: 0.2, ease: 'easeInOut' },
+      }}
+      className="sticky top-0 z-40 bg-transparent pointer-events-none w-full"
     >
       <div className="w-full px-6 sm:px-10 lg:px-16 h-16 flex items-center justify-between gap-4">
         {/* Zone 1: Logo */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 pointer-events-auto">
           <motion.button
             onClick={() => handleNavClick('overview')}
             whileHover={{ scale: 1.02 }}
@@ -193,7 +211,7 @@ export function Header({ onNavigate }: HeaderProps) {
 
         {/* Zone 2: Navigation Capsule with Active Pill Indicator */}
         <nav
-          className="hidden md:flex items-center gap-1 p-1 bg-black/[0.04] border border-black/10 rounded-full text-xs font-mono uppercase tracking-wider backdrop-blur-xs shadow-2xs"
+          className="hidden md:flex items-center gap-1 p-1 bg-neutral-100/90 backdrop-blur-md border border-black/10 rounded-full text-xs font-mono uppercase tracking-wider shadow-xs pointer-events-auto"
           onMouseLeave={() => setHoveredNav(null)}
         >
           {navItems.map((item) => {
@@ -252,7 +270,7 @@ export function Header({ onNavigate }: HeaderProps) {
         </nav>
 
         {/* Zone 3: CTA & Mobile Hamburger Toggle */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 pointer-events-auto">
           <motion.button
             type="button"
             onClick={() => handleNavClick('contact')}
@@ -273,7 +291,7 @@ export function Header({ onNavigate }: HeaderProps) {
             whileTap={{ scale: 0.93 }}
             transition={{ type: 'spring', stiffness: 500, damping: 28 }}
             onClick={() => setMobileMenuOpen((prev) => !prev)}
-            className="md:hidden flex items-center gap-2 px-3.5 py-1.5 border border-black/15 rounded-full text-black hover:bg-black/5 transition-colors cursor-pointer text-xs font-mono uppercase tracking-wider bg-white/80 backdrop-blur-xs"
+            className="md:hidden flex items-center gap-2 px-3.5 py-1.5 border border-black/15 rounded-full text-black hover:bg-black/5 transition-colors cursor-pointer text-xs font-mono uppercase tracking-wider bg-neutral-100/90 backdrop-blur-md shadow-xs pointer-events-auto"
             aria-label="Toggle navigation menu"
           >
             <div className="relative w-3.5 h-3 flex flex-col justify-between py-0.5">
@@ -297,11 +315,11 @@ export function Header({ onNavigate }: HeaderProps) {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden border-t border-black/10 bg-white/95 backdrop-blur-xl px-6 py-6 overflow-hidden shadow-lg"
+            initial={{ opacity: 0, y: -8, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.98 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden mx-4 mt-2 border border-black/10 bg-white/95 backdrop-blur-xl rounded-2xl px-6 py-6 overflow-hidden shadow-2xl pointer-events-auto"
           >
             <div className="space-y-1">
               {navItems.map((item, idx) => {
