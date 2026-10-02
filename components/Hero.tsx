@@ -85,12 +85,18 @@ export function Hero({ onExploreClick, onContactClick, onScrollDownClick }: Hero
         <div className="max-w-6xl">
           {/* Studio Primary Title */}
           <div>
-            <h1 className="text-6xl sm:text-8xl md:text-9xl lg:text-[10vw] xl:text-[11vw] font-black tracking-tighter uppercase leading-[0.95] mb-6 sm:mb-8 flex flex-wrap items-baseline gap-x-4 sm:gap-x-7">
+            <h1
+              className="text-6xl sm:text-8xl md:text-9xl lg:text-[10vw] xl:text-[11vw] font-black uppercase leading-[0.95] mb-6 sm:mb-8 flex flex-wrap items-baseline gap-x-[0.28em]"
+              style={{
+                fontKerning: 'normal',
+                textRendering: 'optimizeLegibility',
+              }}
+            >
               <motion.span
                 initial={{ opacity: 0, y: 36, filter: 'blur(8px)' }}
                 animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                 transition={{ duration: 0.9, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-                className="inline-block text-black"
+                className="inline-block text-black tracking-normal"
               >
                 SAQ
               </motion.span>
@@ -99,7 +105,7 @@ export function Hero({ onExploreClick, onContactClick, onScrollDownClick }: Hero
                 initial={{ opacity: 0, y: 36, filter: 'blur(8px)' }}
                 animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                 transition={{ duration: 0.9, delay: 0.26, ease: [0.16, 1, 0.3, 1] }}
-                className="inline-block text-white p-1 -m-1 [-webkit-text-stroke:2px_black] sm:[-webkit-text-stroke:3px_black] md:[-webkit-text-stroke:4px_black] [paint-order:stroke_fill]"
+                className="inline-block text-white pr-2 sm:pr-3 tracking-[0.025em] [-webkit-text-stroke:2px_black] sm:[-webkit-text-stroke:3px_black] md:[-webkit-text-stroke:4px_black] [paint-order:stroke_fill]"
                 style={{
                   WebkitTextStroke: 'clamp(2.5px, 0.4vw + 2px, 5px) #000000',
                   paintOrder: 'stroke fill',
