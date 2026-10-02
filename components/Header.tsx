@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useSpring } from 'motion/react';
@@ -15,11 +15,15 @@ export function Header({ onNavigate }: HeaderProps) {
   const [hoveredNav, setHoveredNav] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  // Lock scroll-spy updates temporarily when user explicitly clicks a nav item
+  const isNavigatingRef = useRef(false);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   // Smooth scroll progress bar at header bottom
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 30,
+    stiffness: 100,
+    damping: 25,
     restDelta: 0.001,
   });
 
@@ -33,51 +37,77 @@ export function Header({ onNavigate }: HeaderProps) {
   ];
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20);
 
-      const sectionElements = navItems.map((item) => document.getElementById(item.id));
-      const scrollPos = window.scrollY + 140;
+          if (!isNavigatingRef.current) {
+            const sectionElements = navItems.map((item) => ({
+              id: item.id,
+              el: document.getElementById(item.id),
+            }));
 
-      for (let i = sectionElements.length - 1; i >= 0; i--) {
-        const el = sectionElements[i];
-        if (el && el.offsetTop <= scrollPos) {
-          setActiveSection(navItems[i].id);
-          break;
-        }
+            // Header offset + viewport bias for smooth spy
+            const scrollPos = window.scrollY + 180;
+
+            for (let i = sectionElements.length - 1; i >= 0; i--) {
+              const { id, el } = sectionElements[i];
+              if (el && el.offsetTop <= scrollPos) {
+                setActiveSection(id);
+                break;
+              }
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    };
   }, []);
 
   const handleNavClick = (id: string) => {
-    onNavigate(id);
+    isNavigatingRef.current = true;
     setActiveSection(id);
+    setHoveredNav(null);
     setMobileMenuOpen(false);
+    onNavigate(id);
+
+    if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    scrollTimeoutRef.current = setTimeout(() => {
+      isNavigatingRef.current = false;
+    }, 850);
   };
 
   return (
     <header
-      className={`sticky top-0 z-40 transition-all duration-300 ${
+      className={`sticky top-0 z-40 transition-colors duration-300 ${
         isScrolled
-          ? 'bg-white/85 backdrop-blur-md shadow-[0_4px_24px_-4px_rgba(0,0,0,0.06)] border-b border-black/10 py-0.5'
-          : 'bg-white/70 backdrop-blur-xs border-b border-black/10 py-1.5'
+          ? 'bg-white/90 backdrop-blur-md shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)] border-b border-black/10'
+          : 'bg-white/70 backdrop-blur-xs border-b border-black/10'
       }`}
     >
       <div className="w-full px-6 sm:px-10 lg:px-16 h-16 flex items-center justify-between gap-4">
-        {/* Zone 1: Logo & Studio Status */}
+        {/* Zone 1: Logo */}
         <div className="flex items-center gap-4">
           <motion.button
             onClick={() => handleNavClick('overview')}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
             className="flex items-center text-left group cursor-pointer"
             aria-label="SAQ Studio Home"
           >
-            <div className="relative h-9 px-2.5 py-1 bg-neutral-950 rounded-lg border border-neutral-800 flex items-center justify-center shadow-xs transition-all group-hover:bg-black group-hover:border-neutral-700 group-hover:shadow-md overflow-hidden">
+            <div className="relative h-9 px-2.5 py-1 bg-neutral-950 rounded-lg border border-neutral-800 flex items-center justify-center shadow-xs transition-colors group-hover:bg-black group-hover:border-neutral-700 group-hover:shadow-md overflow-hidden">
               <Image
                 src="/last.png"
                 alt="SAQ Studio Logo"
@@ -91,62 +121,55 @@ export function Header({ onNavigate }: HeaderProps) {
               <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
             </div>
           </motion.button>
-
-          {/* Availability live pulse badge */}
-          <div className="hidden xl:inline-flex items-center gap-2 px-3 py-1 rounded-full border border-black/10 bg-white/70 backdrop-blur-xs text-[11px] font-mono text-black/70 shadow-2xs">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-            </span>
-            <span className="uppercase tracking-widest text-[10px] font-medium">Available Q4</span>
-          </div>
         </div>
 
-        {/* Zone 2: Aesthetic Floating Navigation Capsule */}
+        {/* Zone 2: Smooth Floating Navigation Capsule */}
         <nav
-          className="hidden md:flex items-center gap-1 p-1 bg-black/[0.03] border border-black/10 rounded-full text-xs font-mono uppercase tracking-wider backdrop-blur-xs shadow-2xs"
+          className="hidden md:flex items-center gap-1 p-1 bg-black/[0.04] border border-black/10 rounded-full text-xs font-mono uppercase tracking-wider backdrop-blur-xs shadow-2xs"
           onMouseLeave={() => setHoveredNav(null)}
         >
           {navItems.map((item) => {
-            const isActive = activeSection === item.id;
             const isHovered = hoveredNav === item.id;
+            const isActive = activeSection === item.id;
+            const isHighlighted = (hoveredNav ?? activeSection) === item.id;
 
             return (
               <button
                 key={item.id}
+                type="button"
                 onClick={() => handleNavClick(item.id)}
                 onMouseEnter={() => setHoveredNav(item.id)}
-                className={`relative px-4 py-1.5 rounded-full transition-colors cursor-pointer select-none flex items-center gap-1.5 ${
-                  isActive ? 'text-black font-bold' : 'text-black/60 hover:text-black font-medium'
-                }`}
+                className="relative px-4 py-1.5 rounded-full cursor-pointer select-none text-[11px] font-mono tracking-widest uppercase transition-colors"
               >
-                {/* Hover capsule slide animation */}
-                {isHovered && (
+                {/* Unified sliding capsule indicator */}
+                {isHighlighted && (
                   <motion.div
-                    layoutId="navHoverPill"
-                    transition={{ type: 'spring', stiffness: 350, damping: 28 }}
-                    className="absolute inset-0 bg-white shadow-xs border border-black/10 rounded-full z-0"
+                    layoutId="navSlidingPill"
+                    transition={{
+                      type: 'spring',
+                      stiffness: 420,
+                      damping: 32,
+                      mass: 0.6,
+                    }}
+                    className={`absolute inset-0 rounded-full z-0 ${
+                      hoveredNav && !isActive
+                        ? 'bg-white/80 border border-black/10 shadow-2xs'
+                        : 'bg-white border border-black/10 shadow-xs'
+                    }`}
                   />
                 )}
 
-                {/* Active capsule outline when not hovered */}
-                {!isHovered && isActive && (
-                  <motion.div
-                    layoutId="navActivePill"
-                    transition={{ type: 'spring', stiffness: 350, damping: 28 }}
-                    className="absolute inset-0 bg-white/80 border border-black/10 rounded-full z-0 shadow-2xs"
-                  />
-                )}
-
-                {/* Micro active dot */}
-                {isActive && (
-                  <motion.span
-                    layoutId="navActiveDot"
-                    className="relative z-10 w-1.5 h-1.5 rounded-full bg-black shrink-0"
-                  />
-                )}
-
-                <span className="relative z-10 text-[11px] tracking-widest">{item.label}</span>
+                <span
+                  className={`relative z-10 transition-colors duration-200 ${
+                    isActive
+                      ? 'text-black font-semibold'
+                      : isHovered
+                      ? 'text-black font-medium'
+                      : 'text-black/60 hover:text-black font-medium'
+                  }`}
+                >
+                  {item.label}
+                </span>
               </button>
             );
           })}
@@ -155,10 +178,12 @@ export function Header({ onNavigate }: HeaderProps) {
         {/* Zone 3: CTA & Mobile Hamburger Toggle */}
         <div className="flex items-center gap-3">
           <motion.button
+            type="button"
             onClick={() => handleNavClick('contact')}
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-            className="hidden sm:inline-flex items-center gap-2 px-5 py-2 text-xs font-mono uppercase tracking-wider text-white bg-black rounded-full hover:bg-neutral-900 transition-all shadow-xs hover:shadow-md cursor-pointer relative overflow-hidden group"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+            className="hidden sm:inline-flex items-center gap-2 px-5 py-2 text-xs font-mono uppercase tracking-wider text-white bg-black rounded-full hover:bg-neutral-900 shadow-xs hover:shadow-md cursor-pointer relative overflow-hidden group"
           >
             {/* Shimmer sweep */}
             <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
@@ -169,19 +194,20 @@ export function Header({ onNavigate }: HeaderProps) {
           {/* Animated Mobile Hamburger Toggle */}
           <motion.button
             type="button"
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.93 }}
+            transition={{ type: 'spring', stiffness: 500, damping: 28 }}
             onClick={() => setMobileMenuOpen((prev) => !prev)}
-            className="md:hidden flex items-center gap-2 px-3.5 py-1.5 border border-black/15 rounded-full text-black hover:bg-black/5 transition-colors cursor-pointer text-xs font-mono uppercase tracking-wider bg-white/80 backdrop-blur-xs active:scale-95"
+            className="md:hidden flex items-center gap-2 px-3.5 py-1.5 border border-black/15 rounded-full text-black hover:bg-black/5 transition-colors cursor-pointer text-xs font-mono uppercase tracking-wider bg-white/80 backdrop-blur-xs"
             aria-label="Toggle navigation menu"
           >
             <div className="relative w-3.5 h-3 flex flex-col justify-between py-0.5">
               <span
-                className={`w-full h-[1.5px] bg-black transition-all duration-300 origin-center ${
+                className={`w-full h-[1.5px] bg-black transition-transform duration-300 origin-center ${
                   mobileMenuOpen ? 'rotate-45 translate-y-[3.5px]' : ''
                 }`}
               />
               <span
-                className={`w-full h-[1.5px] bg-black transition-all duration-300 origin-center ${
+                className={`w-full h-[1.5px] bg-black transition-transform duration-300 origin-center ${
                   mobileMenuOpen ? '-rotate-45 -translate-y-[3.5px]' : ''
                 }`}
               />
@@ -198,7 +224,7 @@ export function Header({ onNavigate }: HeaderProps) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
             className="md:hidden border-t border-black/10 bg-white/95 backdrop-blur-xl px-6 py-6 overflow-hidden shadow-lg"
           >
             <div className="space-y-1">
@@ -207,11 +233,12 @@ export function Header({ onNavigate }: HeaderProps) {
                 return (
                   <motion.button
                     key={item.id}
-                    initial={{ opacity: 0, x: -12 }}
+                    type="button"
+                    initial={{ opacity: 0, x: -8 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.035, duration: 0.22 }}
+                    transition={{ delay: idx * 0.025, duration: 0.2 }}
                     onClick={() => handleNavClick(item.id)}
-                    className={`w-full flex items-center justify-between py-3 px-4 rounded-xl text-left text-xs font-mono uppercase tracking-wider transition-all cursor-pointer ${
+                    className={`w-full flex items-center justify-between py-3 px-4 rounded-xl text-left text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer ${
                       isActive
                         ? 'bg-black text-white font-bold shadow-xs'
                         : 'text-black/80 hover:bg-black/5 hover:pl-5'
@@ -227,8 +254,9 @@ export function Header({ onNavigate }: HeaderProps) {
             </div>
             <div className="pt-4 mt-3 border-t border-black/10">
               <button
+                type="button"
                 onClick={() => handleNavClick('contact')}
-                className="w-full flex items-center justify-center gap-2 py-3.5 text-xs font-mono font-semibold uppercase tracking-widest text-white bg-black rounded-full hover:bg-neutral-800 transition-all shadow-xs cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 py-3.5 text-xs font-mono font-semibold uppercase tracking-widest text-white bg-black rounded-full hover:bg-neutral-800 transition-colors shadow-xs cursor-pointer"
               >
                 <span>Start an Inquiry</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -240,10 +268,9 @@ export function Header({ onNavigate }: HeaderProps) {
 
       {/* 1.5px Animated Scroll Progress Line */}
       <motion.div
-        className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-black/20 via-black to-black/80 origin-left"
+        className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-black origin-left z-50 pointer-events-none"
         style={{ scaleX }}
       />
     </header>
   );
 }
-
