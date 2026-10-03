@@ -130,13 +130,13 @@ export function Contact({ onNavigate }: ContactProps = {}) {
           </div>
         </ScrollReveal>
 
-        {/* Contact Grid: Direct Line & Adjusted Compact Form */}
+        {/* Contact Grid: Direct Line & Balanced Form framing the center mascot */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center my-auto py-2">
           {/* Left Column: Direct Studio Line & Coordinates (No borders) */}
           <ScrollReveal delay={0.1} yOffset={24} duration={0.7} className="lg:col-span-4">
             <div className="p-2 sm:p-3 bg-transparent space-y-3.5">
               <div>
-                <span className="block text-xs font-mono uppercase tracking-wider text-black/50 mb-0.5 flex items-center gap-1.5">
+                <span className="block text-xs font-mono uppercase tracking-wider text-black/70 mb-0.5 flex items-center gap-1.5 font-semibold">
                   <Phone className="w-3.5 h-3.5 text-black" />
                   <span>Direct Line</span>
                 </span>
@@ -154,13 +154,13 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                     title="Copy phone number"
                     aria-label="Copy phone number"
                   >
-                    {copiedPhone ? <Check className="w-3.5 h-3.5 text-black" /> : <Copy className="w-3.5 h-3.5 text-black/60" />}
+                    {copiedPhone ? <Check className="w-3.5 h-3.5 text-black" /> : <Copy className="w-3.5 h-3.5 text-black/70" />}
                   </button>
                 </div>
               </div>
 
               <div>
-                <span className="block text-xs font-mono uppercase tracking-wider text-black/50 mb-0.5 flex items-center gap-1.5">
+                <span className="block text-xs font-mono uppercase tracking-wider text-black/70 mb-0.5 flex items-center gap-1.5 font-semibold">
                   <Mail className="w-3.5 h-3.5 text-black" />
                   <span>Email</span>
                 </span>
@@ -178,19 +178,19 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                     title="Copy email address"
                     aria-label="Copy email address"
                   >
-                    {copiedEmail ? <Check className="w-3.5 h-3.5 text-black" /> : <Copy className="w-3.5 h-3.5 text-black/60" />}
+                    {copiedEmail ? <Check className="w-3.5 h-3.5 text-black" /> : <Copy className="w-3.5 h-3.5 text-black/70" />}
                   </button>
                 </div>
               </div>
 
               <div>
-                <span className="block text-xs font-mono uppercase tracking-wider text-black/50 mb-1 flex items-center gap-1.5">
+                <span className="block text-xs font-mono uppercase tracking-wider text-black/70 mb-1 flex items-center gap-1.5 font-semibold">
                   <MessageSquare className="w-3.5 h-3.5 text-black" />
                   <span>Instant Messaging</span>
                 </span>
                 <a
                   href={`https://wa.me/${directPhoneRaw}?text=${encodeURIComponent("Hello SAQ Studio! I'd like to discuss a new website project.")}`}
-                  className="inline-flex items-center justify-between w-full px-3.5 py-2 bg-black text-white text-xs font-mono uppercase tracking-wider rounded-md hover:bg-neutral-800 transition-all group"
+                  className="inline-flex items-center justify-between w-full px-3.5 py-2 bg-black text-white text-xs font-mono uppercase tracking-wider rounded-md hover:bg-neutral-800 transition-all group shadow-xs"
                 >
                   <span>Chat on WhatsApp</span>
                   <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
@@ -199,10 +199,10 @@ export function Contact({ onNavigate }: ContactProps = {}) {
             </div>
           </ScrollReveal>
 
-          {/* Right Column: Inquiry Form (Smooth border, transparent, perfectly proportioned) */}
-          <ScrollReveal delay={0.2} yOffset={24} duration={0.7} className="lg:col-span-8">
+          {/* Right Column: Inquiry Form (Balanced, high readability, beautiful frosted glass framing mascot) */}
+          <ScrollReveal delay={0.2} yOffset={24} duration={0.7} className="lg:col-span-5 lg:col-start-8">
             {submitted ? (
-              <div className="rounded-2xl border border-black/30 p-6 sm:p-8 text-center bg-transparent space-y-4">
+              <div className="rounded-2xl border border-black/20 p-6 sm:p-8 text-center bg-white/40 backdrop-blur-md shadow-xs space-y-4">
                 <div className="w-10 h-10 mx-auto rounded-full border border-black flex items-center justify-center">
                   <Check className="w-5 h-5 text-black" />
                 </div>
@@ -232,16 +232,16 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                 )}
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="rounded-2xl border border-black/30 p-4 sm:p-5 bg-transparent space-y-3">
-                <div className="text-xs font-mono uppercase tracking-wider text-black/60 border-b border-black/10 pb-2 flex items-center justify-between">
+              <form onSubmit={handleSubmit} className="rounded-2xl border border-black/20 p-4 sm:p-5 bg-white/35 backdrop-blur-md shadow-xs space-y-3">
+                <div className="text-xs font-mono uppercase tracking-wider text-black border-b border-black/15 pb-2 flex items-center justify-between font-bold">
                   <span>Project Vision & Details</span>
-                  <span className="text-[11px] text-black/40">* Required fields</span>
+                  <span className="text-[11px] text-black/60 font-medium">* Required fields</span>
                 </div>
 
-                {/* Row 1: Name, Phone, Email in 3 columns on tablet/desktop */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {/* Row 1: Name & Phone in 2 balanced columns */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label htmlFor="name" className="block text-[11px] font-mono uppercase text-black/70 mb-1">
+                    <label htmlFor="name" className="block text-[11px] font-mono uppercase text-black mb-1 font-semibold">
                       Your Name *
                     </label>
                     <input
@@ -251,12 +251,12 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                       placeholder="John Doe"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-transparent border border-black/25 rounded-lg px-3 py-1.5 text-sm text-black placeholder:text-black/40 focus:outline-hidden focus:border-black transition-colors"
+                      className="w-full bg-white/60 border border-black/30 rounded-lg px-3 py-1.5 text-sm text-black placeholder:text-black/50 focus:outline-hidden focus:border-black focus:bg-white/80 transition-colors font-medium"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="phone" className="block text-[11px] font-mono uppercase text-black/70 mb-1">
+                    <label htmlFor="phone" className="block text-[11px] font-mono uppercase text-black mb-1 font-semibold">
                       Phone Number *
                     </label>
                     <input
@@ -266,12 +266,15 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                       placeholder="+1 (555) 000-0000"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full bg-transparent border border-black/25 rounded-lg px-3 py-1.5 text-sm text-black placeholder:text-black/40 focus:outline-hidden focus:border-black transition-colors"
+                      className="w-full bg-white/60 border border-black/30 rounded-lg px-3 py-1.5 text-sm text-black placeholder:text-black/50 focus:outline-hidden focus:border-black focus:bg-white/80 transition-colors font-medium"
                     />
                   </div>
+                </div>
 
+                {/* Row 2: Email & Industry in 2 balanced columns */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label htmlFor="email" className="block text-[11px] font-mono uppercase text-black/70 mb-1">
+                    <label htmlFor="email" className="block text-[11px] font-mono uppercase text-black mb-1 font-semibold">
                       Email Address *
                     </label>
                     <input
@@ -281,22 +284,19 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                       placeholder="john@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-transparent border border-black/25 rounded-lg px-3 py-1.5 text-sm text-black placeholder:text-black/40 focus:outline-hidden focus:border-black transition-colors"
+                      className="w-full bg-white/60 border border-black/30 rounded-lg px-3 py-1.5 text-sm text-black placeholder:text-black/50 focus:outline-hidden focus:border-black focus:bg-white/80 transition-colors font-medium"
                     />
                   </div>
-                </div>
 
-                {/* Row 2: Industry & Service Needed */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label htmlFor="industry" className="block text-[11px] font-mono uppercase text-black/70 mb-1">
+                    <label htmlFor="industry" className="block text-[11px] font-mono uppercase text-black mb-1 font-semibold">
                       Industry
                     </label>
                     <select
                       id="industry"
                       value={formData.industry}
                       onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
-                      className="w-full bg-transparent border border-black/25 rounded-lg px-3 py-1.5 text-sm text-black focus:outline-hidden focus:border-black transition-colors"
+                      className="w-full bg-white/60 border border-black/30 rounded-lg px-3 py-1.5 text-sm text-black focus:outline-hidden focus:border-black focus:bg-white/80 transition-colors font-medium"
                     >
                       <option value="" className="bg-white text-black">Select industry</option>
                       <option value="E-Commerce & Retail" className="bg-white text-black">E-Commerce & Retail</option>
@@ -309,32 +309,33 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                       <option value="Other" className="bg-white text-black">Other</option>
                     </select>
                   </div>
-
-                  <div>
-                    <label htmlFor="serviceNeeded" className="block text-[11px] font-mono uppercase text-black/70 mb-1">
-                      Service Needed
-                    </label>
-                    <select
-                      id="serviceNeeded"
-                      value={formData.serviceNeeded}
-                      onChange={(e) => setFormData({ ...formData, serviceNeeded: e.target.value })}
-                      className="w-full bg-transparent border border-black/25 rounded-lg px-3 py-1.5 text-sm text-black focus:outline-hidden focus:border-black transition-colors"
-                    >
-                      <option value="" className="bg-white text-black">Select service</option>
-                      <option value="High-Performance Web Development" className="bg-white text-black">High-Performance Web Development</option>
-                      <option value="E-Commerce Platform" className="bg-white text-black">E-Commerce Platform</option>
-                      <option value="Web Application & SaaS" className="bg-white text-black">Web Application & SaaS</option>
-                      <option value="Full Website Redesign" className="bg-white text-black">Full Website Redesign</option>
-                      <option value="Conversion Optimization (CRO)" className="bg-white text-black">Conversion Optimization (CRO)</option>
-                      <option value="Bespoke Digital Experience" className="bg-white text-black">Bespoke Digital Experience</option>
-                      <option value="Other" className="bg-white text-black">Other</option>
-                    </select>
-                  </div>
                 </div>
 
-                {/* Row 3: Project Details */}
+                {/* Row 3: Service Needed full width */}
                 <div>
-                  <label htmlFor="projectDetails" className="block text-[11px] font-mono uppercase text-black/70 mb-1">
+                  <label htmlFor="serviceNeeded" className="block text-[11px] font-mono uppercase text-black mb-1 font-semibold">
+                    Service Needed
+                  </label>
+                  <select
+                    id="serviceNeeded"
+                    value={formData.serviceNeeded}
+                    onChange={(e) => setFormData({ ...formData, serviceNeeded: e.target.value })}
+                    className="w-full bg-white/60 border border-black/30 rounded-lg px-3 py-1.5 text-sm text-black focus:outline-hidden focus:border-black focus:bg-white/80 transition-colors font-medium"
+                  >
+                    <option value="" className="bg-white text-black">Select service</option>
+                    <option value="High-Performance Web Development" className="bg-white text-black">High-Performance Web Development</option>
+                    <option value="E-Commerce Platform" className="bg-white text-black">E-Commerce Platform</option>
+                    <option value="Web Application & SaaS" className="bg-white text-black">Web Application & SaaS</option>
+                    <option value="Full Website Redesign" className="bg-white text-black">Full Website Redesign</option>
+                    <option value="Conversion Optimization (CRO)" className="bg-white text-black">Conversion Optimization (CRO)</option>
+                    <option value="Bespoke Digital Experience" className="bg-white text-black">Bespoke Digital Experience</option>
+                    <option value="Other" className="bg-white text-black">Other</option>
+                  </select>
+                </div>
+
+                {/* Row 4: Project Details */}
+                <div>
+                  <label htmlFor="projectDetails" className="block text-[11px] font-mono uppercase text-black mb-1 font-semibold">
                     Project Details
                   </label>
                   <textarea
@@ -343,11 +344,11 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                     placeholder="Tell us about your project vision, target audience, specific requirements, or reference links..."
                     value={formData.projectDetails}
                     onChange={(e) => setFormData({ ...formData, projectDetails: e.target.value })}
-                    className="w-full bg-transparent border border-black/25 rounded-lg p-2.5 text-sm text-black placeholder:text-black/40 focus:outline-hidden focus:border-black transition-colors resize-y min-h-[58px]"
+                    className="w-full bg-white/60 border border-black/30 rounded-lg p-2.5 text-sm text-black placeholder:text-black/50 focus:outline-hidden focus:border-black focus:bg-white/80 transition-colors resize-y min-h-[58px] font-medium"
                   />
                 </div>
 
-                {/* Row 4: Submit Button */}
+                {/* Row 5: Submit Button */}
                 <div className="pt-0.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <button
                     type="submit"
@@ -364,7 +365,7 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                     )}
                   </button>
 
-                  <div className="text-[11px] font-mono text-black/50">
+                  <div className="text-[11px] font-mono text-black/70 font-medium">
                     Direct WhatsApp routing · Instant response
                   </div>
                 </div>
