@@ -96,7 +96,7 @@ export function Footer({ onNavigate }: FooterProps) {
                 <li>
                   <Link
                     href="/#services"
-                    onClick={(e) => handleNavClick(e, 'disciplines')}
+                    onClick={(e) => handleNavClick(e, 'services')}
                     className="hover:text-black hover:underline transition-colors block"
                   >
                     Services
@@ -104,8 +104,7 @@ export function Footer({ onNavigate }: FooterProps) {
                 </li>
                 <li>
                   <Link
-                    href="/#process"
-                    onClick={(e) => handleNavClick(e, 'process')}
+                    href="/process"
                     className="hover:text-black hover:underline transition-colors block"
                   >
                     Process

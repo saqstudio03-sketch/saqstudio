@@ -4,8 +4,7 @@ import React from 'react';
 import { Header } from '@/components/Header';
 import { Hero } from '@/components/Hero';
 import { Works } from '@/components/Works';
-import { Disciplines } from '@/components/Disciplines';
-import { Process } from '@/components/Process';
+import { Services } from '@/components/Services';
 import { About } from '@/components/About';
 import { Contact } from '@/components/Contact';
 import { Faq } from '@/components/Faq';
@@ -18,7 +17,7 @@ export default function HomePage() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    const targetId = id === 'services' ? 'disciplines' : id === 'portfolio' ? 'works' : id;
+    const targetId = id === 'portfolio' ? 'works' : id;
     const el = document.getElementById(targetId);
     if (el) {
       const headerOffset = 64;
@@ -52,8 +51,7 @@ export default function HomePage() {
         >
           <About />
           <Works onContactClick={() => scrollToSection('contact')} />
-          <Disciplines onContactClick={() => scrollToSection('contact')} />
-          <Process onContactClick={() => scrollToSection('contact')} />
+          <Services onContactClick={() => scrollToSection('contact')} />
           <Faq onContactClick={() => scrollToSection('contact')} />
         </ScrollSequenceBackground>
 

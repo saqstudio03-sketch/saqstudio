@@ -28,7 +28,7 @@ export function Header({ onNavigate }: HeaderProps) {
     { label: 'Home', id: 'overview' },
     { label: 'About Us', id: 'about' },
     { label: 'Works', id: 'works' },
-    { label: 'Disciplines', id: 'disciplines' },
+    { label: 'Services', id: 'services' },
     { label: 'FAQ', id: 'faq' },
     { label: 'Contact', id: 'contact' },
   ];
