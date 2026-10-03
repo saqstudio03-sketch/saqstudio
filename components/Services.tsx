@@ -132,10 +132,10 @@ export function Services({ onContactClick }: ServicesProps) {
       id="services" 
       className="relative border-b border-black/10 py-20 md:py-28 bg-transparent overflow-hidden scroll-mt-20"
     >
-      <div className="w-full px-6 sm:px-10 lg:px-16">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
         {/* Section Header */}
         <ScrollReveal yOffset={20} duration={0.6}>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 md:mb-24 pb-8 border-b border-black/10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 md:mb-20 pb-8 border-b border-black/10">
             <div>
               <div className="text-xs font-mono uppercase tracking-widest text-black/60 mb-2">
                 What We Build
@@ -150,40 +150,40 @@ export function Services({ onContactClick }: ServicesProps) {
           </div>
         </ScrollReveal>
 
-        {/* Alternating Zig-Zag Rows (One service left, one right, exactly like ProgBiz reference) */}
-        <div className="space-y-20 sm:space-y-28 lg:space-y-36">
+        {/* Alternating Zig-Zag Rows (One service left, one right, balanced and proportional) */}
+        <div className="space-y-16 sm:space-y-20 lg:space-y-24">
           {SERVICES_DATA.map((service, idx) => {
             const isImageLeft = idx % 2 === 0;
 
             return (
               <div 
                 key={service.id}
-                className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center"
+                className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center"
               >
-                {/* Visual Image Mockup Column */}
+                {/* Visual Image Mockup Column (Restrained, elegant, balanced) */}
                 <div 
-                  className={`lg:col-span-7 ${
-                    isImageLeft ? 'lg:order-1' : 'lg:order-2'
+                  className={`lg:col-span-6 flex ${
+                    isImageLeft ? 'lg:order-1 justify-start' : 'lg:order-2 justify-end'
                   }`}
                 >
-                  <ScrollReveal delay={0.1} yOffset={24} duration={0.7}>
+                  <ScrollReveal delay={0.1} yOffset={20} duration={0.6} className="w-full">
                     <Link 
                       href={service.href}
-                      className="group block relative rounded-2xl lg:rounded-3xl overflow-hidden border border-black/15 bg-neutral-100 shadow-md hover:shadow-2xl transition-all duration-500 cursor-pointer"
+                      className="group block relative w-full max-w-[480px] mx-auto rounded-2xl overflow-hidden border border-black/10 bg-neutral-100 shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer"
                     >
-                      <div className="relative aspect-16/10 w-full overflow-hidden bg-neutral-900">
+                      <div className="relative aspect-16/10 w-full max-h-[310px] overflow-hidden bg-neutral-900">
                         <Image
                           src={service.image}
                           alt={service.imageAlt}
                           fill
-                          sizes="(max-width: 1024px) 100vw, 60vw"
+                          sizes="(max-width: 768px) 100vw, 480px"
                           className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-700 ease-out"
                         />
                       </div>
 
                       {/* Subtle hover pill overlay */}
-                      <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-black/85 text-white text-[11px] font-mono uppercase tracking-wider rounded-full backdrop-blur-xs shadow-md">
+                      <div className="absolute bottom-3.5 right-3.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-black/85 text-white text-[10px] font-mono uppercase tracking-wider rounded-full backdrop-blur-xs shadow-md">
                           <span>View Details</span>
                           <ArrowUpRight className="w-3.5 h-3.5" />
                         </span>
@@ -194,7 +194,7 @@ export function Services({ onContactClick }: ServicesProps) {
 
                 {/* Content / Narrative Column */}
                 <div 
-                  className={`lg:col-span-5 ${
+                  className={`lg:col-span-6 ${
                     isImageLeft ? 'lg:order-2' : 'lg:order-1'
                   }`}
                 >
