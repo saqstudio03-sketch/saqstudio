@@ -198,10 +198,10 @@ export function Contact({ onNavigate }: ContactProps = {}) {
             </div>
           </ScrollReveal>
 
-          {/* Right Column: Inquiry Form (Balanced, high readability, beautiful frosted glass framing mascot) */}
+          {/* Right Column: Inquiry Form (Transparent box framing mascot) */}
           <ScrollReveal delay={0.2} yOffset={24} duration={0.7} className="lg:col-span-5 lg:col-start-8">
             {submitted ? (
-              <div className="rounded-2xl border border-black/20 p-6 sm:p-8 text-center bg-white/40 backdrop-blur-md shadow-xs space-y-4">
+              <div className="rounded-2xl border border-black/25 p-6 sm:p-8 text-center bg-transparent space-y-4">
                 <div className="w-10 h-10 mx-auto rounded-full border border-black flex items-center justify-center">
                   <Check className="w-5 h-5 text-black" />
                 </div>
@@ -231,7 +231,7 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                 )}
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="rounded-2xl border border-black/20 p-4 sm:p-5 bg-white/35 backdrop-blur-md shadow-xs space-y-3">
+              <form onSubmit={handleSubmit} className="rounded-2xl border border-black/25 p-4 sm:p-5 bg-transparent space-y-3">
                 <div className="text-xs font-mono uppercase tracking-wider text-black border-b border-black/15 pb-2 flex items-center justify-between font-bold">
                   <span>Project Vision & Details</span>
                   <span className="text-[11px] text-black/60 font-medium">* Required fields</span>
@@ -250,7 +250,7 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                       placeholder="John Doe"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-white/60 border border-black/30 rounded-lg px-3 py-1.5 text-sm text-black placeholder:text-black/50 focus:outline-hidden focus:border-black focus:bg-white/80 transition-colors font-medium"
+                      className="w-full bg-transparent border border-black/25 rounded-lg px-3 py-1.5 text-sm text-black placeholder:text-black/50 focus:outline-hidden focus:border-black transition-colors font-medium"
                     />
                   </div>
 
@@ -265,7 +265,7 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                       placeholder="+1 (555) 000-0000"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full bg-white/60 border border-black/30 rounded-lg px-3 py-1.5 text-sm text-black placeholder:text-black/50 focus:outline-hidden focus:border-black focus:bg-white/80 transition-colors font-medium"
+                      className="w-full bg-transparent border border-black/25 rounded-lg px-3 py-1.5 text-sm text-black placeholder:text-black/50 focus:outline-hidden focus:border-black transition-colors font-medium"
                     />
                   </div>
                 </div>
@@ -283,7 +283,7 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                       placeholder="john@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-white/60 border border-black/30 rounded-lg px-3 py-1.5 text-sm text-black placeholder:text-black/50 focus:outline-hidden focus:border-black focus:bg-white/80 transition-colors font-medium"
+                      className="w-full bg-transparent border border-black/25 rounded-lg px-3 py-1.5 text-sm text-black placeholder:text-black/50 focus:outline-hidden focus:border-black transition-colors font-medium"
                     />
                   </div>
 
@@ -295,7 +295,7 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                       id="industry"
                       value={formData.industry}
                       onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
-                      className="w-full bg-white/60 border border-black/30 rounded-lg px-3 py-1.5 text-sm text-black focus:outline-hidden focus:border-black focus:bg-white/80 transition-colors font-medium"
+                      className="w-full bg-transparent border border-black/25 rounded-lg px-3 py-1.5 text-sm text-black focus:outline-hidden focus:border-black transition-colors font-medium"
                     >
                       <option value="" className="bg-white text-black">Select industry</option>
                       <option value="E-Commerce & Retail" className="bg-white text-black">E-Commerce & Retail</option>
@@ -319,7 +319,7 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                     id="serviceNeeded"
                     value={formData.serviceNeeded}
                     onChange={(e) => setFormData({ ...formData, serviceNeeded: e.target.value })}
-                    className="w-full bg-white/60 border border-black/30 rounded-lg px-3 py-1.5 text-sm text-black focus:outline-hidden focus:border-black focus:bg-white/80 transition-colors font-medium"
+                    className="w-full bg-transparent border border-black/25 rounded-lg px-3 py-1.5 text-sm text-black focus:outline-hidden focus:border-black transition-colors font-medium"
                   >
                     <option value="" className="bg-white text-black">Select service</option>
                     <option value="High-Performance Web Development" className="bg-white text-black">High-Performance Web Development</option>
@@ -343,7 +343,7 @@ export function Contact({ onNavigate }: ContactProps = {}) {
                     placeholder="Tell us about your project vision, target audience, specific requirements, or reference links..."
                     value={formData.projectDetails}
                     onChange={(e) => setFormData({ ...formData, projectDetails: e.target.value })}
-                    className="w-full bg-white/60 border border-black/30 rounded-lg p-2.5 text-sm text-black placeholder:text-black/50 focus:outline-hidden focus:border-black focus:bg-white/80 transition-colors resize-y min-h-[58px] font-medium"
+                    className="w-full bg-transparent border border-black/25 rounded-lg p-2.5 text-sm text-black placeholder:text-black/50 focus:outline-hidden focus:border-black transition-colors resize-y min-h-[58px] font-medium"
                   />
                 </div>
 
