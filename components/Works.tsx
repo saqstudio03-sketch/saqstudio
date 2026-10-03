@@ -68,7 +68,8 @@ export function Works({ onContactClick }: WorksProps) {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <section id="works" className="border-b border-black/10 py-20 md:py-28 bg-transparent overflow-hidden scroll-mt-20">
+    <section id="works" className="relative border-b border-black/10 py-20 md:py-28 bg-transparent overflow-hidden scroll-mt-20">
+      <div id="portfolio" className="absolute -top-20 pointer-events-none" aria-hidden="true" />
       <div className="w-full px-6 sm:px-10 lg:px-16">
         {/* Section Header */}
         <ScrollReveal yOffset={20} duration={0.6}>

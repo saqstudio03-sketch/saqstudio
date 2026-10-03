@@ -6,7 +6,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface HeaderProps {
-  onNavigate: (id: string) => void;
+  onNavigate?: (id: string) => void;
 }
 
 export function Header({ onNavigate }: HeaderProps) {
@@ -161,7 +161,11 @@ export function Header({ onNavigate }: HeaderProps) {
     setHoveredNav(null);
     setMobileMenuOpen(false);
     setIsVisible(true);
-    onNavigate(id);
+    if (onNavigate) {
+      onNavigate(id);
+    } else {
+      window.location.href = id === 'overview' ? '/#home' : `/#${id}`;
+    }
 
     if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
     scrollTimeoutRef.current = setTimeout(() => {

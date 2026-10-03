@@ -5,18 +5,21 @@ import { Header } from '@/components/Header';
 import { Hero } from '@/components/Hero';
 import { Works } from '@/components/Works';
 import { Disciplines } from '@/components/Disciplines';
+import { Process } from '@/components/Process';
 import { About } from '@/components/About';
 import { Contact } from '@/components/Contact';
 import { Faq } from '@/components/Faq';
+import { Footer } from '@/components/Footer';
 import { ScrollSequenceBackground } from '@/components/ScrollSequenceBackground';
 
 export default function HomePage() {
   const scrollToSection = (id: string) => {
-    if (id === 'overview') {
+    if (id === 'overview' || id === 'home') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    const el = document.getElementById(id);
+    const targetId = id === 'services' ? 'disciplines' : id === 'portfolio' ? 'works' : id;
+    const el = document.getElementById(targetId);
     if (el) {
       const headerOffset = 64;
       const elementPosition = el.getBoundingClientRect().top;
@@ -50,11 +53,15 @@ export default function HomePage() {
           <About />
           <Works onContactClick={() => scrollToSection('contact')} />
           <Disciplines onContactClick={() => scrollToSection('contact')} />
+          <Process onContactClick={() => scrollToSection('contact')} />
           <Faq onContactClick={() => scrollToSection('contact')} />
         </ScrollSequenceBackground>
 
         <Contact onNavigate={scrollToSection} />
       </main>
+
+      {/* Comprehensive Site Footer */}
+      <Footer onNavigate={scrollToSection} />
     </div>
   );
 }

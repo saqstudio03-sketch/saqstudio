@@ -1,8 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import Image from 'next/image';
-import { Phone, Mail, MessageSquare, Copy, Check, ArrowRight, Send, ExternalLink, ArrowUp } from 'lucide-react';
+import { Phone, Mail, MessageSquare, Copy, Check, ArrowRight, Send, ExternalLink } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
 
 interface ContactProps {
@@ -372,110 +371,6 @@ export function Contact({ onNavigate }: ContactProps = {}) {
               </form>
             )}
           </ScrollReveal>
-        </div>
-
-        {/* Integrated Footer (Inside same section over background video) */}
-        <div className="border-t border-black/15 pt-5 sm:pt-6 mt-4">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-3">
-            {/* Brand Logo & Mission */}
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={() => (onNavigate ? onNavigate('overview') : window.scrollTo({ top: 0, behavior: 'smooth' }))}
-                className="flex items-center text-left group cursor-pointer"
-                aria-label="SAQ Studio Home"
-              >
-                <div className="relative h-8 px-2 py-0.5 bg-neutral-950 rounded-lg border border-neutral-800 flex items-center justify-center shadow-xs transition-all group-hover:bg-black group-hover:border-black">
-                  <Image
-                    src="/last.png"
-                    alt="SAQ Studio Logo"
-                    width={64}
-                    height={32}
-                    className="h-5 w-auto object-contain transition-transform group-hover:scale-105"
-                    unoptimized
-                  />
-                </div>
-              </button>
-              <span className="text-xs text-black/60 font-mono hidden md:inline">
-                Monochrome simplicity, architectural restraint, and clear communication.
-              </span>
-            </div>
-
-            {/* Quick Links */}
-            <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs font-mono uppercase tracking-wider">
-              <button
-                type="button"
-                onClick={() => (onNavigate ? onNavigate('overview') : window.scrollTo({ top: 0, behavior: 'smooth' }))}
-                className="hover:underline cursor-pointer"
-              >
-                Home
-              </button>
-              <button
-                type="button"
-                onClick={() => onNavigate?.('about')}
-                className="hover:underline cursor-pointer"
-              >
-                About
-              </button>
-              <button
-                type="button"
-                onClick={() => onNavigate?.('works')}
-                className="hover:underline cursor-pointer"
-              >
-                Works
-              </button>
-              <button
-                type="button"
-                onClick={() => onNavigate?.('disciplines')}
-                className="hover:underline cursor-pointer"
-              >
-                Disciplines
-              </button>
-              <button
-                type="button"
-                onClick={() => onNavigate?.('faq')}
-                className="hover:underline cursor-pointer"
-              >
-                FAQ
-              </button>
-              <button
-                type="button"
-                onClick={() => onNavigate?.('contact')}
-                className="hover:underline cursor-pointer font-semibold text-black"
-              >
-                Inquire
-              </button>
-            </div>
-
-            {/* Back to top button */}
-            <div>
-              <button
-                type="button"
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="inline-flex items-center gap-2 border border-black/30 hover:border-black rounded-full px-4 py-1.5 text-xs font-mono uppercase hover:bg-black hover:text-white transition-all cursor-pointer shadow-xs hover:scale-105 active:scale-95"
-                aria-label="Back to top"
-              >
-                <span>Back to Top</span>
-                <ArrowUp className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          </div>
-
-          {/* Bottom Copyright bar */}
-          <div className="pt-3 border-t border-black/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono text-black/50">
-            <div>
-              © {new Date().getFullYear()} SAQ STUDIO. All rights reserved.
-            </div>
-            <div className="flex items-center gap-3">
-              <a href="tel:+917510466725" className="hover:text-black hover:underline transition-colors">
-                +91 75104 66725
-              </a>
-              <span>·</span>
-              <a href="mailto:contact@saqstudio.in" className="hover:text-black hover:underline transition-colors">
-                contact@saqstudio.in
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </section>
