@@ -3,7 +3,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Phone, Mail, MessageSquare, Copy, Check, ArrowRight, Send, ExternalLink } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
-import { motion } from 'motion/react';
 
 interface ContactProps {
   onNavigate?: (id: string) => void;
@@ -26,7 +25,6 @@ export function Contact({ onNavigate }: ContactProps = {}) {
   const [lastWhatsAppUrl, setLastWhatsAppUrl] = useState('');
 
   const videoRef = useRef<HTMLVideoElement>(null);
-  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -34,42 +32,6 @@ export function Contact({ onNavigate }: ContactProps = {}) {
       videoRef.current.muted = true;
       videoRef.current.play().catch(() => {});
     }
-  }, []);
-
-  // Smooth scroll-stopping assist: When scrolling down from FAQ, smoothly stop cleanly at Contact
-  useEffect(() => {
-    let isAutoSnapping = false;
-    let lastScrollY = typeof window !== 'undefined' ? window.scrollY : 0;
-
-    const handleScroll = () => {
-      if (isAutoSnapping) return;
-      const currentScrollY = window.scrollY;
-      const scrollingDown = currentScrollY > lastScrollY;
-      lastScrollY = currentScrollY;
-
-      const el = sectionRef.current;
-      if (!el) return;
-
-      const rect = el.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      // When scrolling down past FAQ and entering Contact (top between 60px and 70% of viewport):
-      // Smoothly stop correctly on Contact!
-      if (scrollingDown && rect.top > 60 && rect.top < windowHeight * 0.7) {
-        isAutoSnapping = true;
-        const targetY = currentScrollY + rect.top;
-        window.scrollTo({
-          top: targetY,
-          behavior: 'smooth',
-        });
-        setTimeout(() => {
-          isAutoSnapping = false;
-        }, 750);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const directPhone = '+91 75104 66725';
@@ -131,18 +93,7 @@ export function Contact({ onNavigate }: ContactProps = {}) {
   };
 
   return (
-    <motion.section
-      id="contact"
-      ref={sectionRef}
-      initial={{ opacity: 0, y: 120 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ amount: 0.12, once: false }}
-      transition={{ 
-        duration: 0.85, 
-        ease: [0.16, 1, 0.3, 1] 
-      }}
-      className="relative border-b border-black/10 bg-white overflow-hidden scroll-mt-0 min-h-[100dvh] lg:h-[100dvh] flex flex-col justify-between pt-16 pb-6 sm:pt-20 sm:pb-8 snap-start snap-always"
-    >
+    <section id="contact" className="relative border-b border-black/10 bg-white overflow-hidden scroll-mt-20 min-h-[100dvh] flex flex-col justify-between pt-16 pb-6 sm:pt-20 sm:pb-8">
       {/* Background Video Layer (Playing as continuous GIF loop) */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <video
@@ -422,6 +373,6 @@ export function Contact({ onNavigate }: ContactProps = {}) {
           </ScrollReveal>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }
